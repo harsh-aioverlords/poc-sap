@@ -1,0 +1,26 @@
+{
+  "_source_file": "Grainger Inv  9961958726 PO 4745000208-BT05.pdf",
+  "cash_discount": 0,
+  "charges": [],
+  "due_date": "07/23/2026",
+  "grand_total": 1243.51,
+  "invoice_date": "06/23/2026",
+  "invoice_no": "9961958726",
+  "lines": [
+    {
+      "amount": 1148.74,
+      "description": "M18 FUEL DT BAND SAW + M18 HO6.0 BATTER",
+      "line_ref": "1",
+      "po_line_ref": "",
+      "qty": 1,
+      "unit_price": 1148.74,
+      "uom": "",
+      "vendor_item_code": "438MN2"
+    }
+  ],
+  "net_total": 1148.74,
+  "payment_terms": "Net 30 days after inv",
+  "po_number_raw": "4745000208-BT05",
+  "tax_amount": 94.77,
+  "vendor_name": "Grainger"
+}

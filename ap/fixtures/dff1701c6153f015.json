@@ -1,0 +1,21 @@
+{
+  "_source_file": "KGC-26-2249.pdf",
+  "cash_discount": 0,
+  "charges": [
+    {
+      "amount": 5130.0,
+      "description": "Railcar Storage",
+      "kind": "storage"
+    }
+  ],
+  "due_date": "",
+  "grand_total": 5130.0,
+  "invoice_date": "06/30/26",
+  "invoice_no": "KGC-26-2249",
+  "lines": [],
+  "net_total": 5130.0,
+  "payment_terms": "NET 45 DAYS",
+  "po_number_raw": "",
+  "tax_amount": 0,
+  "vendor_name": "KATOEN NATIE GULF COAST INC"
+}

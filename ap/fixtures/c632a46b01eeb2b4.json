@@ -1,0 +1,26 @@
+{
+  "_source_file": "Invoice_82104709-00.pdf",
+  "cash_discount": 0,
+  "charges": [],
+  "due_date": "08/20/2026",
+  "grand_total": 1485.0,
+  "invoice_date": "07/06/2026",
+  "invoice_no": "82104709-00",
+  "lines": [
+    {
+      "amount": 1485.0,
+      "description": "C-3M 2364 48MM X 55M SCOTCH MASKING",
+      "line_ref": "1",
+      "po_line_ref": "",
+      "qty": 300,
+      "unit_price": 4.95,
+      "uom": "RL",
+      "vendor_item_code": "JIN 021200-43354"
+    }
+  ],
+  "net_total": 1485.0,
+  "payment_terms": "NET 45C",
+  "po_number_raw": "4741026212",
+  "tax_amount": 0,
+  "vendor_name": "R.S. HUGHES COMPANY, INC."
+}

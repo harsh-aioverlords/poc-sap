@@ -1,0 +1,32 @@
+{
+  "_source_file": "Grainger Inv  9972782578 PO 4741030682-BT04.pdf",
+  "cash_discount": 0,
+  "charges": [
+    {
+      "amount": 259.69,
+      "description": "OTHER SHIPPING",
+      "kind": "other"
+    }
+  ],
+  "due_date": "08/01/2026",
+  "grand_total": 1098.64,
+  "invoice_date": "07/02/2026",
+  "invoice_no": "9972782578",
+  "lines": [
+    {
+      "amount": 755.22,
+      "description": "VERTICAL FILE CABINET,BLACK",
+      "line_ref": "1",
+      "po_line_ref": "1",
+      "qty": 2,
+      "unit_price": 377.61,
+      "uom": "",
+      "vendor_item_code": "415G33"
+    }
+  ],
+  "net_total": 1015.14,
+  "payment_terms": "Net 30 days after inv",
+  "po_number_raw": "4741030682-BT04",
+  "tax_amount": 83.73,
+  "vendor_name": "Grainger"
+}

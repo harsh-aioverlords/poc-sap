@@ -1,0 +1,52 @@
+{
+  "_source_file": "Invoice 424543.pdf",
+  "cash_discount": 0,
+  "charges": [
+    {
+      "amount": 44.5,
+      "description": "Fuel Surcharge-Fuels",
+      "kind": "service_fee"
+    }
+  ],
+  "due_date": "07/25/2026",
+  "grand_total": 5348.64,
+  "invoice_date": "06/25/2026",
+  "invoice_no": "424543",
+  "lines": [
+    {
+      "amount": 932.62,
+      "description": "Reg Unl Gasoline 87 Octane E10%",
+      "line_ref": "1",
+      "po_line_ref": "",
+      "qty": 270,
+      "unit_price": 3.4414,
+      "uom": "1.0",
+      "vendor_item_code": ""
+    },
+    {
+      "amount": 2883.23,
+      "description": "ULS Diesel #2 Dyed",
+      "line_ref": "2",
+      "po_line_ref": "",
+      "qty": 700,
+      "unit_price": 4.1189,
+      "uom": "1.0",
+      "vendor_item_code": ""
+    },
+    {
+      "amount": 1242.4,
+      "description": "ULS Diesel #2 Clear",
+      "line_ref": "3",
+      "po_line_ref": "",
+      "qty": 200,
+      "unit_price": 4.1139,
+      "uom": "1.0",
+      "vendor_item_code": ""
+    }
+  ],
+  "net_total": 5348.64,
+  "payment_terms": "Net 30",
+  "po_number_raw": "42259",
+  "tax_amount": 244.89,
+  "vendor_name": "3L Energy Solutions"
+}

@@ -1,0 +1,32 @@
+{
+  "_source_file": "TX85-01021160.pdf",
+  "cash_discount": 6.14,
+  "charges": [
+    {
+      "amount": 48.39,
+      "description": "FREIGHT",
+      "kind": "freight"
+    }
+  ],
+  "due_date": "07/25/26",
+  "grand_total": 717.04,
+  "invoice_date": "07/08/26",
+  "invoice_no": "TX85-01021160",
+  "lines": [
+    {
+      "amount": 614.0,
+      "description": "V3.0730-56 FILTER ELEMENT HYD FILTERS",
+      "line_ref": "1",
+      "po_line_ref": "X00020",
+      "qty": 5,
+      "unit_price": 122.8,
+      "uom": "EA",
+      "vendor_item_code": "15179"
+    }
+  ],
+  "net_total": 614.0,
+  "payment_terms": "1% 10TH & 25TH NET 30",
+  "po_number_raw": "4741030582-BT04",
+  "tax_amount": 54.65,
+  "vendor_name": "Motion Industries, Inc."
+}

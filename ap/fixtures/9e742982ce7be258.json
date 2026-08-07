@@ -1,0 +1,62 @@
+{
+  "_source_file": "Invoice_26004981_from_Bull_Customs_Brokerage_LLC.pdf",
+  "cash_discount": 0,
+  "charges": [
+    {
+      "amount": 1675,
+      "description": "Transloading - MRKU3613442",
+      "kind": "other"
+    },
+    {
+      "amount": 3715,
+      "description": "Demurrage - MRKU3613442",
+      "kind": "demurrage"
+    },
+    {
+      "amount": 145.59,
+      "description": "Import Dwell Fee - MRKU3613442",
+      "kind": "other"
+    },
+    {
+      "amount": 420,
+      "description": "Detention Fee - Import - TCNU7011450",
+      "kind": "detention"
+    },
+    {
+      "amount": 45,
+      "description": "Service & Accounting",
+      "kind": "service_fee"
+    },
+    {
+      "amount": 135,
+      "description": "Electronic Payment / Wire Fee",
+      "kind": "wire_fee"
+    },
+    {
+      "amount": 149.82,
+      "description": "Disbursement Fee",
+      "kind": "disbursement"
+    }
+  ],
+  "due_date": "",
+  "grand_total": 8811.67,
+  "invoice_date": "06/30/2026",
+  "invoice_no": "2600498-1",
+  "lines": [
+    {
+      "amount": 2526.26,
+      "description": "Flatbed Delivery",
+      "line_ref": "",
+      "po_line_ref": "",
+      "qty": 2,
+      "unit_price": 1263.13,
+      "uom": "",
+      "vendor_item_code": ""
+    }
+  ],
+  "net_total": 8811.67,
+  "payment_terms": "Due on receipt",
+  "po_number_raw": "4745000031",
+  "tax_amount": 0,
+  "vendor_name": "Bull Customs Brokerage LLC"
+}

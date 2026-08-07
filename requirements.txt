@@ -3,4 +3,5 @@ pdfplumber
 openai
 python-dotenv
 pandas
-reportlab
+pydantic
+pytest

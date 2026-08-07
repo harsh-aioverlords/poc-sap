@@ -1,0 +1,26 @@
+{
+  "_source_file": "Inv.9411589430  Jindal  Pipe  - SO8450.pdf",
+  "cash_discount": 0,
+  "charges": [],
+  "due_date": "",
+  "grand_total": 50354.58,
+  "invoice_date": "04/30/2026",
+  "invoice_no": "9411589430",
+  "lines": [
+    {
+      "amount": 50354.58,
+      "description": "24\"X0.444\" API GR X65 ID COATING",
+      "line_ref": "1",
+      "po_line_ref": "",
+      "qty": 10234.67,
+      "unit_price": 4.92,
+      "uom": "FEET",
+      "vendor_item_code": ""
+    }
+  ],
+  "net_total": 50354.58,
+  "payment_terms": "",
+  "po_number_raw": "4747000049",
+  "tax_amount": 0,
+  "vendor_name": "JINDAL SAW USA, LLC"
+}

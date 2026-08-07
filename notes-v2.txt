@@ -1,0 +1,235 @@
+[00:00:02] Speaker 0: Consultancy. We are a Panchay consultancy firm. Okay? So here, we are just trying to understand your AP process, accounts payable, and explore the possibility of automation. Did I did I say?
+
+[00:00:20] No. Not on the payments and on the entire AP process, which includes your billing, your invoice processing, myro entries, bank payments, vendor reconciliation, vendor payments, your vendor ledger management. Alright. Okay. So end to end AP process.
+
+[00:00:41] Speaker 1: Mhmm. Okay. Alright. Let me share the screen.
+
+[00:00:47] Speaker 0: Sure.
+
+[00:01:16] Speaker 2: You see my SAP. Okay.
+
+[00:01:21] Speaker 0: Yes. I can see your screen. SAP window.
+
+[00:01:25] Speaker 2: Okay. So on the payment side, what I do is on the natural payment. So I use these two t codes. First for, running the payments that we do on a weekly basis. So that's the t code.
+
+[00:01:40] Here, we have the F110.
+
+[00:01:42] Speaker 0: Perfect.
+
+[00:01:43] Speaker 2: On that, we just put the payment date, whatever dates I am running, like, today or tomorrow's payment. So I just put the date. And just for a regular thing, I already did it. So I just put on the dates. Identification code is just like a I just put the 716.
+
+[00:02:01] If I make a payment on 07/06, just put 07/16. Since I did two transactions on that same day, so I just put '8, 07/16, and July. So when I click when I click on status because this has already been generated, it's showing me what has been done. Let me do a quick instead of doing an old one, let me show you something.
+
+[00:02:27] Speaker 1: Tomorrow's date, 07/17. Okay.
+
+[00:02:34] Speaker 2: So I put the date, and then I put the identification number just for just like a sequence number or anything like to identify the next time you do a payment, something like so I just gone on this one, and I click on the parameters. Over here, I would just put the company code 9280 and the payment method. And so it's like a thirty day payment. So I just put the the thirty days before, and then here, have a list of vendors where you can just select all the vendors you wanna make a payment on. Let me see which vendor I have opened right now.
+
+[00:03:13] Check. So I click on here. This is the approval list of now vendor codes. I'm just putting one right now to just to show you. Here's a list of all the vendors you can make in one payment like a nutshell.
+
+[00:04:06] So you put all the vendors over here and just click on the run page, and then you go ahead and save it. Save the para parameters, and then you go back over here and just you put the proposal. So I just put the proposal here and click on that, and then I just click on the status. Call back. I will be able to make the changes on that one.
+
+[00:04:51] Check it as enough for the items.
+
+[00:05:40] Speaker 1: Let me do that one, that again. Should we should go to the next page about the parameter?
+
+[00:06:34] Speaker 2: Payment date is not a time for payment as well. It's not paid yet. So it should take to the next page where I make a payment now, and I can see which all vendors I can make a payment on.
+
+[00:06:47] Speaker 1: See. See, almost I've been sharing with you.
+
+[00:06:52] Speaker 0: Six. Yeah. I under I understand that too. Do you run a 110 I 110 decode and accordingly make the payment. I have few questions around this payment process as is payment process.
+
+[00:07:04] Number one, do we have a scheduler to automatically execute this at one month zero t code, or we have to do it manually every time?
+
+[00:07:14] Speaker 2: Yeah. I just do that this manually every time, like, thirty days payment time. So I just do that every weekly basis. So whatever is due for payment, I just pick up all those vendors list. I just do that by aging if I'm missing any invoices because where after we book it, we just keep it aside and just take it up, like, for due for payment and process all those invoices.
+
+[00:07:38] So just like I show you here, I just put all those vendors list over here and just run it. And from now the next page, you can see the selection where you can choose whichever invoices you wanted to pay or not. Correct. We go to the next. Yes.
+
+[00:07:51] Speaker 0: Right.
+
+[00:07:52] Speaker 2: Mhmm. Even if you show a lost lot of invoices, which is not all due, but it will still show a lot of list, and you can just go ahead and select whichever you want to, and then you can process, that one. So it's just like a manual thing. It's not like an automated every week. It's been done.
+
+[00:08:09] Speaker 0: Okay. And how are we ensuring the duplicate invoices, vendor blocks, missing details of whether the vendor is sanctioned or not? How are we checking these parameters manually, or do we have any automated system in SAP as of now?
+
+[00:08:26] Speaker 2: For, like, a duplicate invoice bookings?
+
+[00:08:29] Speaker 0: Yes. Duplicate invoice or the whether the vendor is blocked or not.
+
+[00:08:33] Speaker 2: Mhmm. For the duplicate, let me go one by one. So for the duplicate vendors, bookings, like, you do a, it will automatically show up. Like, if you try to book one thing, and it will let you know, like, it's this been, like, you're doing a duplicate entry. That's the only time now where you can see it's been, like, a like, the it's been duplicative.
+
+[00:08:56] I'm not making a payment time. This doesn't show anything like that. Yeah. That's that's another thing. And, what was the next question on that on the same the payment blocks?
+
+[00:09:09] Payment blocks, I like this one, I just go over here. If I see any payment blocks right over here, I just go ahead and double click on it. So and just remove the payment blocks after checking. So just I have to edit that one and just remove that payment block. Right now, it's for our kind of we just put our for the invoice verification or what previous says it's locked for payment.
+
+[00:09:36] Now we had changed to our. So it's a invoice verification. So I just remove the block. If the block is there, I won't be able to make that payment at all. It will go directly to the default showing that it cannot be paid.
+
+[00:09:51] So before I do can do the, I just remove that blocks before I can make that payment. So I just do a vendor aging, put take out on the Excel sheet, and then to see just everything if everything is in if he said if there's anything in the block or something like that. Because some of the invoices, payments, they automatically take their blocks. I don't know what could be the reason, but it happens automatically. So I just go to there and verify if there's something a block has been denied.
+
+[00:10:21] This is a manual payment kind of thing. It does the same thing. Not for all the vendors. Some of the some of the I believe that's a freight freight invoices where the where this blocks pops up every time. Not only
+
+[00:10:34] Speaker 0: you can you can change the status, right, while making the payment? You can you can change the payment from blocked to eligible for payment. Right?
+
+[00:10:44] Speaker 2: Right.
+
+[00:10:45] Speaker 0: Got it.
+
+[00:10:48] Speaker 2: What part is how the
+
+[00:10:49] Speaker 0: how are our approval workflow?
+
+[00:10:54] Speaker 2: Approval workflows, I just go do that every week, like, every week. So it depends on my work. I just keep on every Thursdays or Fridays. So I just switch on like, if there's still more invoices to be booked, I just switch on to the next, like, next day or something like that. Yeah.
+
+[00:11:16] So it's a depends. So so every week we do by Thursdays or Fridays. So that's mainly how we process right now. So it's approval. It's like, I just do the NACHA payments and, give it to my supervisor, Ripika, sir.
+
+[00:11:28] And, and then and then the post in the bank and then give it to Ripika, and Ripika, sir, approves that. So that's how it works.
+
+[00:11:37] Speaker 0: Wait. Just want to understand the SAP workflow. Let's say you we are by postponing the f one one zero, a proposal is gets generated. Right? Payment proposal.
+
+[00:11:46] Mhmm. So does the approval notify automatically, or you have to take out the printout or some sort of Excel and then only go to that person for and take a sign off physical sign off on the payment approval proposal? No.
+
+[00:12:04] Speaker 2: No. No. So what I do is, like like, after I get this proposal and everything, I just run another t code for getting this NACHA file, that's F d t a. So this is where I run the other t code after the first one. So, yeah, I just took that payment and just put that format and then generate that one.
+
+[00:12:32] So I just this is my original one. Out of that, I just so I just take this much only invoices which I want to pay. So I just download that information. So I would be getting a, like, it's been downloaded text file kind of thing. So nine one two.
+
+[00:12:48] So so this has been downloaded. I can show you this one where it's going downloaded. So here are all my NACHA files. Every week, I make the payments. So that's where it gets generated.
+
+[00:13:03] And this, I take it to my bank and then download this Nacha file.
+
+[00:13:12] Speaker 0: Mhmm.
+
+[00:13:13] Speaker 2: Is the is the NACHA file. So text file that's a a text file or text folder. So I just, take this document and then put that information in the NACHA, like, in the bank. Mhmm. And I submit over there so it the bank, it process automatically and will just take it, will show me a printout of all those, payment, information.
+
+[00:13:38] And I just give it to Vikas, sir, so that he can so when did you when you do, like, an ACH payment, it will show, like, the payment that there's an information for that for the certain vendor. Like, in in the case of Natcha, it will show a list of all those payments, vendors, all those list, everything.
+
+[00:13:59] Speaker 0: Okay. So till the time you download this file, because it will not be integrated, that there are some payments which are pending for approval. Right?
+
+[00:14:08] Speaker 2: Yeah. So when I do this yeah. So after this after I download this everything, I just go ahead, click the previous t code again. And when I click on the status so I see the previous one I did was sent 16 sent 168. So when I click on the status, after all those so it says the hosting order six has been generated and 6 has been completed.
+
+[00:14:33] This is where the SAP will automatically send an email to all the vendors who are lessors on the list. So it will take all those vendors list and will send it to all the vendors. That that's how we get in the notification that this machine vendors have been we pay we get that information.
+
+[00:14:56] Speaker 0: So
+
+[00:14:59] Speaker 2: so, like, this one, like, in this case, where there was a so payment advice was created for that much six vendors. So it will send to each email, their email, whatever email is there, it's been sent to them. So that that's how yeah. That's a list of the log. It's been printed out.
+
+[00:15:18] Mhmm. So that we get that in our GPU email group. That's our email group for the accounting. So, one is cc to us, to the GPU email, and other the email is going directly to the vendor.
+
+[00:15:34] Speaker 0: Okay.
+
+[00:15:35] Speaker 2: So I have to click the status so that it basically being generated to to those guys. I just so I try and just click on the status, and it will just it will automatically generate all those invoices to all for all the vendors that's been generated. So yep.
+
+[00:15:51] Speaker 0: Can you show can you show a sample advice, vendor advice?
+
+[00:16:28] Speaker 2: So this is, like, like so it gives a payment advice. Yeah. It it soon be paid to the amount and the date, and they see, like, this this is an employee, and it's been sent to a GP group email. And this is our payment advice that's been sent to them. So this is, like, payment advice to them.
+
+[00:16:51] So it will let you know the, the invoice numbers, the invoice amount, the amount of how much has been paid and everything. This or I should use something of a different vendor kind of thing. Yeah. Yeah. This is a recent payment that was sent to be done.
+
+[00:17:15] Sign in, please. So it will let you know the invoice number, the invoice date, the amount, and everything, the document number, payment update, what's your date, and everything.
+
+[00:17:26] Speaker 0: Got it. Got it. Okay. So Matthew, after bank process our payments okay. So do we do we import bank statement automatically, or do we pass manual entries?
+
+[00:17:47] Well, just want to understand. Do we have a host host integration with our banks for all the payments? Like, the entities automatically get hosted to SAP from backlink directly. We are host host connection.
+
+[00:17:59] Speaker 2: Like yeah. For the NACHA payments, when I process through this one
+
+[00:18:04] Speaker 0: Mhmm.
+
+[00:18:04] Speaker 2: Through the, through the t codes for this one, the payment advice goes directly. I don't have to book a 53 payment, manual entries for all those for the NACHA payments. Other than that, when I make an ACH payments, like a separate entry for each, other than NACHA, like a like a vendor like a vendor advance or like a manual ACH payment Mhmm. Employees, what do you call, the expense reports. So that's when done manually, and then then I just put in the bank and just have to do the manual entry in the SAP.
+
+[00:18:43] So the same thing happens. The payment advice has been sent to after I make up a manual payment of f 53. So that's where it will manual manual I just put the manual entries for that. So I just put in there for so that this is a manual payment for each of the vendors that goes on a manual basis or and for the employees. When I put the save this entry, it's the email has been sent to the customer directly to them.
+
+[00:19:15] Speaker 3: Okay.
+
+[00:19:16] Speaker 2: Other than Nacha and ACH payments, that's the only thing. And for the advance, we have f 48. We put that everything manually in the in the Chase website and process that. So we have templates made in the Chase Bank. So we did just have to select that and put that amount manually everything.
+
+[00:19:39] Speaker 0: Okay. And how are we knocking off the payments again, the invoice in the because on the vendor ledger, vendor g r? Is it automatically
+
+[00:19:50] Speaker 2: when the No. Like, the when the g r is done, we book that off, and then we set it off later. So yeah. When the GR is done, that's the only way where we can book it and set it off. Till that time, we just hold hold to it.
+
+[00:20:04] So we'll just leave that as an advance till it gets cleared off.
+
+[00:20:11] Speaker 0: Oh, let's say you made a lump lump sum advance to a vendor. Right? Let's say for Mhmm. 1 like USD. Mhmm.
+
+[00:20:18] And the invoice keeps on coming against that in advance. Mhmm. So how are you knocking off those invoices and that advance in that vendor ledger as of now? Is it manual, or do we have any RP in between?
+
+[00:20:34] Speaker 2: No. We do that manually. We do that manually. Yes.
+
+[00:20:39] Speaker 0: And I believe it's a it's a it's a very time consuming task.
+
+[00:20:43] Speaker 2: Right. Right. Like, if there's an export from India or China or anything, like, so even if it is for advance, some of the vendors, pay directly 100%. Some, it's, like, 30%, 70. If this is just there's a break off of it and 10 10% on the commissioning and everything that's been done.
+
+[00:21:01] Till then, we just hold off the day. Everything 100% has been done. It still just stands there for a while till everything gets 100% paid off on that one, and then we can adjust that. Otherwise, we can we do that. We can do manually, like, partly, set off or can leave it like that if it is going for a long time.
+
+[00:21:26] Otherwise, we can just set off in a three months time. I think it for from India to here, it likes export takes around two or three months. So, basically, it's like two or three months. It just stays in advance over there. Yeah.
+
+[00:21:39] Speaker 0: Right. Right. Mhmm. And, Matthew, do we have any AP dashboard below to analyze the payments? When I say payment, you are aging aging report, block payment, early payment discount, payment cycles time.
+
+[00:21:55] Are we tracking these KPIs as as of now?
+
+[00:21:58] Speaker 2: So we have a dashboard for from surname. Was there any for the dashboard we have right now? Surname, I just forgot it. Anil, can you hear me?
+
+[00:22:15] Speaker 3: Yes. Yes, Matthew.
+
+[00:22:17] Speaker 2: For the dashboard we have right now, what's the name for that?
+
+[00:22:23] Speaker 3: Because we have prepared the dashboard on the Power BI.
+
+[00:22:26] Speaker 2: Power BI. Yes. Mhmm. On the Power BI, you can see the list of, like, when the payments how many advances are there. And It's
+
+[00:22:35] Speaker 3: it's updated on the daily basis. There are two portion, advanced phase and the GRN. We have the amount of advances that are pending for GRN and the the GRN pending for the Myro part.
+
+[00:22:59] Speaker 0: So is this dashboard integrated with SAP, or I'll be using Excel's files as the input for the dashboard?
+
+[00:23:07] Speaker 3: Right now, we are using Excel files to update that dashboard. It's I mean, on behind, I have no idea how it gets updated. Even also, I think, you know him. Josh is the one who updates this dashboard
+
+[00:23:28] Speaker 2: Mhmm.
+
+[00:23:28] Speaker 3: On the daily basis. How it exactly works?
+
+[00:23:35] Speaker 2: Yeah. Maybe Dash will be able to no.
+
+[00:23:38] Speaker 1: Will be able to data from Anil.
+
+[00:23:41] Speaker 3: Daily file of Anil,
+
+[00:23:47] Speaker 1: Data from daily basis, mail from It's IT team. IT team.
+
+[00:23:55] Speaker 3: Gets updated to the Excel file. Right?
+
+[00:24:04] Speaker 4: System did generated mail from IT team. Part updation.
+
+[00:24:13] Speaker 0: Yeah.
+
+[00:24:19] Speaker 4: Yeah. Yes. Yes.
+
+[00:24:22] Speaker 0: Got it.
+
+[00:24:27] Speaker 1: So,
+
+[00:24:30] Speaker 0: Anil, I'm clear on the payment processing part. Okay? Yes. So kindly allow us a day or so. Most of early next week, we will come up with a detailed proposal as we discussed.
+
+[00:24:44] Right? Okay. And let's take this forward.
+
+[00:24:50] Speaker 3: Sure. On the payment part as well and the Miro part as well.
+
+[00:24:54] Speaker 0: Those We will come we will cover entire AP AP process, which includes your Miro, your payments, your analytics, everything.
+
+[00:25:03] Speaker 3: Okay. No problem. So we'll have Vikash, sir, as well in the call. So we'll I'll discuss with him, and, we'll arrange a suitable time.
+
+[00:25:13] Speaker 0: Sure.
+
+[00:25:16] Speaker 3: Till next Wednesday. I think it's on leave.
+
+[00:25:20] Speaker 0: Okay. Yeah. So most of we will be ready by then with our proposal for sure. And let's connect with Rikastar on Thursday of Friday, which is his availability.
+
+[00:25:30] Speaker 3: Sure. You can showcase how, your maybe how it works on your system.
+
+[00:25:39] Speaker 0: Sure. Done. Thank you. Thanks, everyone. Thanks for your time.
+
+[00:25:44] Speaker 3: Any other question
+
+[00:25:46] Speaker 0: on Nothing from nothing from my side. Okay. I'll Nice. We'll ping you if if I have any questions, sir, separately.
+
+[00:25:55] Speaker 2: Sure. Sure.
+
+[00:25:57] Speaker 0: Thank you. Thanks, everyone. Thanks for your time. Alright. Bye bye.
+
+[00:26:00] Speaker 2: Alright. Bye. Bye.

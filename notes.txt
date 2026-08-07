@@ -1,0 +1,667 @@
+[00:00:07] Speaker 0: Yeah. Thanks.
+
+[00:00:08] Speaker 1: Yes. So Emily is going to Emily has some scenarios how we work in this Miro part. She's gonna show how we process the Miro and the SAP. So, Emily, please go ahead and show how we work. You have some scenarios as well.
+
+[00:00:34] Emily, you are on mute.
+
+[00:00:44] Speaker 0: Alright. There we go. Okay. I'm gonna share my birth invoice. Can everyone hear me?
+
+[00:00:49] Yes.
+
+[00:00:50] Speaker 1: We can hear you.
+
+[00:00:56] Speaker 0: Invoices. Most of them have a PO number. You can see it here in this area of the circle. In the notation for the PO number.
+
+[00:01:09] Speaker 2: Emily, your voice your voice is breaking. What is it? Are you able to hear me, Emily?
+
+[00:01:17] Speaker 0: No. It's breaking from
+
+[00:01:19] Speaker 3: me as well. It's just there is a cracking between the, you know, words.
+
+[00:01:24] Speaker 0: Okay. Okay. Is it a little better now?
+
+[00:01:28] Speaker 3: Much better. Yes.
+
+[00:01:29] Speaker 0: Okay. Okay. Sorry. I had to adjust my my headphones. Okay.
+
+[00:01:36] So as you can see on our invoices, the the PO number is noted, and we do require that, you know, all of our invoices have the PO number on it.
+
+[00:01:47] Speaker 3: Okay.
+
+[00:01:47] Speaker 0: So a lot
+
+[00:01:48] Speaker 3: of this is a domestic invoice, a local purchase invoice. Correct?
+
+[00:01:53] Speaker 0: Correct. Yes. And most of them will come across when we receive them where the PO number is noted. This dash right here that says BTO4, some of them will say BTO4, some will say BTO5. On the invoices, beyond this dash, that's more for our internal processing for us to know.
+
+[00:02:16] So we would not need that part to be captured captured when the PO number is. We would just need this portion.
+
+[00:02:26] Speaker 3: Understood. K.
+
+[00:02:28] Speaker 0: Yes. And so when we do the Miro in SAP, We'll enter our Miro screen. And if I'm gonna I'm just gonna put a random date just for the processing part because that really won't matter.
+
+[00:02:53] Speaker 1: It must be. K.
+
+[00:02:58] Speaker 0: Let me pull the PO number
+
+[00:03:04] Speaker 4: So it's going to
+
+[00:03:08] Speaker 0: the, everything's gonna be listed here with the PO. So the it's gonna automatically pull the vendor.
+
+[00:03:16] Speaker 1: There should be invoice number in the reference part, not one. And invoice date Correct. Should be the same as for the invoice, and the posting date can be different.
+
+[00:03:28] Speaker 0: Yes. So it's going to it's gonna change depending on on the invoice. So I'm pulling the invoice up, and we're going to correct the invoice information as it matches.
+
+[00:03:49] Speaker 4: And
+
+[00:03:52] Speaker 0: then our total dollar amount. So here, we put the total amount of the invoice including the tax, and then and that's gonna include tax and shipping. So the total amount, and then we note the tax there. We manually have to change this code here.
+
+[00:04:16] Speaker 1: Emily, we are not able to see see the invoice. We can only see this SAP screen.
+
+[00:04:23] Speaker 0: Okay. I can only show I can I can only share one screen at a time? Yes. There's the invoice. Let me this there.
+
+[00:04:37] Is there a way that I can share both of my screens? Because I have two screens on my monitor.
+
+[00:04:44] Speaker 1: You can all use all tab for using this invoice and then
+
+[00:04:51] Speaker 3: Yeah. But more or less, we have seen the invoice. So there is a invoice, there is a shipping cost, and then there is tax. So clear.
+
+[00:05:00] Speaker 0: Correct.
+
+[00:05:01] Speaker 1: Right.
+
+[00:05:02] Speaker 0: Correct. And so we'll have to manually change this code here. That's the tax code. And we change it. It'll be down here in our it'll be listed on the PO right here.
+
+[00:05:25] So we'll go ahead. So we'll pull the b two code to match that. If it doesn't match exactly, you'll get an error message, and you won't be able to post the Miro. And so you'll be able oops. There we go.
+
+[00:05:42] You'll be able to see the item. So that this information here is auto populated according to what is already in the purchase order. And so we manually match it up. We verify the quantity, the unit price, and the total price. So I'm trying to get it to where you can see everything all at once.
+
+[00:06:12] There. It's a little better. Okay. There. And so you can see that there.
+
+[00:06:24] Mostly, what we have to so we we verify that. You'll have to select the items that you've matched. There. So you'll select in there, make sure they match. One of the problems that we're running into, we have to make sure that we do not select this item over here to close the shipping out because a lot of times freight and shipping will come on a separate invoice.
+
+[00:06:57] Speaker 1: When when sorry, Emily. We don't have any freight here, so we can manually do zero in this amount code so that, the amount will match with the invoice amount. After that, we can process the Miro. You can select the third one as well.
+
+[00:07:16] Speaker 0: The third one here for the freight? Yes. So
+
+[00:07:19] Speaker 1: Right. There is no freight in the system, but, at the time of prepare, making the PO
+
+[00:07:25] Speaker 0: Mhmm.
+
+[00:07:26] Speaker 1: Might be they have, they thought that there would be a freight in the system.
+
+[00:07:31] Speaker 0: Mhmm.
+
+[00:07:31] Speaker 1: And now after getting the invoice, we can see here that there is no freight. So we will make it zero manually?
+
+[00:07:41] Speaker 0: Correct. So we need to make the dollar amount to zero. So well No.
+
+[00:07:46] Speaker 1: The third one is
+
+[00:07:47] Speaker 0: the third one. Getting
+
+[00:07:48] Speaker 1: Third one.
+
+[00:07:48] Speaker 0: Will be getting a separate we will be getting a separate invoice for the freight from a different vendor because this was shipped third party here. I'm gonna get an invoice from a different vendor for the freight on this. So we do not want to check that and close it out.
+
+[00:08:05] Speaker 1: Okay.
+
+[00:08:07] Speaker 0: Because if I if I change my even if I change my dollar amount to zero and check this, it's gonna close this on the PO. But I need that part of the PO to stay open so that when I get my freight bill from my third party vendor, it still will be available on the purchase order. So we just make sure that those aren't selected because we want that part of the purchase order to stay available for the invoice.
+
+[00:08:31] Speaker 1: Second one should be selected. We can understand that freight can be, freight yes. $2.59. We already have in other shipping, I think.
+
+[00:08:47] Speaker 0: Mhmm. Right. So this is the bill that I'm gonna get from Roadrunner. They noted right here, my carrier Roadrunner transportation. And we're actually I'm probably gonna get an invoice not from Roadrunner, but from a part from a third party that I think it's probably Logistex is gonna send me an invoice because they contracted Roadrunner to deliver this this for us.
+
+[00:09:11] So I need this part of the purchase order to still a still still stay open and available. Does that are you following me there?
+
+[00:09:20] Speaker 1: Yeah.
+
+[00:09:22] Speaker 3: Clear.
+
+[00:09:24] Speaker 0: Yeah. So if I select this, when I post my Miro, it's gonna close this line out of my PO.
+
+[00:09:33] Speaker 3: Got it. Understood.
+
+[00:09:35] Speaker 0: Okay. Anil, do you agree with me on that? Are we in agreement on that one? Or does it need to be handled a different way?
+
+[00:09:46] Speaker 1: So, Emily, we already have, this other shipping charges in this invoice amount. So we'll have to select the second one as well. So we'll get Okay. The $10 bill afterwards.
+
+[00:10:02] Speaker 0: Correct. So you want me to select this and zero it out?
+
+[00:10:09] Speaker 1: No. No. No. No. No.
+
+[00:10:10] Oh, okay. Second second one second one. Other shipping, other charges.
+
+[00:10:18] Speaker 0: Okay. Okay. And so you want me to select that one and then zero it out. Correct? Let me take that off.
+
+[00:10:33] Okay. Are we in agreeance on that right there?
+
+[00:10:40] Speaker 1: Yes.
+
+[00:10:41] Speaker 0: Okay. And then we would select save. And it's gonna tell us that the invoice is in q m. So I can't do a hard post to the PO because the the quality decision has to be made by the end user. Okay.
+
+[00:11:04] Speaker 1: So this is one of the scenario where QM decision is pending. So after they are doing the quality check and they will clear the quality. And after that, we can process the Myro.
+
+[00:11:18] Speaker 3: Is there a specific parameter based on this, QMS range, or is this for all the, entries?
+
+[00:11:25] Speaker 1: There is always a quality parameter for every entry. So every invoice will have to cross this quality parameter, and afterwards, we can go ahead and do the Miro part.
+
+[00:11:42] Speaker 2: So, Anil, one question. At this stage, before we get the approval from the quality team, will this entry hit my ledgers, g l's, or not? The Miro is completed or not at this point of time before quality approval?
+
+[00:11:56] Speaker 1: Yes. Tell me. Miro will be will be pending till the quality checks completes.
+
+[00:12:04] Speaker 2: Okay. So once the quality team approves, this entry this Miro will automatically hit my GL accounts. Right? Or are we supposed to perform any other other additional step post that approval?
+
+[00:12:17] Speaker 1: We will have to check, with, once I get, get this invoice, after that, we'll have to check the the I mean, where this, after, after processing of the GRN, we'll have to check where this invoice is pending. And, afterwards, it will, like, you can see there is QM decision pending. So we'll check-in the PO, and we'll email the user to do the QM for this invoice so that we can go ahead and do the MIRO.
+
+[00:12:54] Speaker 2: Typically, what
+
+[00:12:55] Speaker 1: happens If GRN is called GRN GRN is already done. That means the, material is already received by us. It's pending for the quality check only.
+
+[00:13:07] Speaker 2: So, typically, what happens, I mean, in a AP process now, once you got once you created the GRNA, will bank your inventory GLs. Right? Cox.
+
+[00:13:17] Speaker 1: Right.
+
+[00:13:18] Speaker 2: Right? And once the quality approves the invoice, then only the accounts can perform the MIRO. But the MIRO is nothing but a step back from the final payment. Second last step in the AP process.
+
+[00:13:29] Speaker 1: Right.
+
+[00:13:30] Speaker 2: That that's why I'm getting confused, Mutla. We have a layer in between the quality approval.
+
+[00:13:35] Speaker 1: Right. We have a layer here for every every part. So that is why we'll have to connect the user for doing the Miro. So we'll email them, and then they will do the MIRO after that. I mean, we have the manual process.
+
+[00:13:52] Like, you can see that we have freight value of $10 extra we have here.
+
+[00:13:57] Speaker 2: So this this right can always be there. Like, you bought some excess material or there's some disconnect or mismatch in the invoices versus the PO or the GRN quantity, tolerance limits, etcetera, etcetera.
+
+[00:14:08] Speaker 1: Can be it can be can be different. Material quantity cannot be different. But, yes, there could be freight or other charges like, we have already I think we have discussed, like, the custom charges, freight charges. So we'll get the bill after receiving the material. So Of course.
+
+[00:14:30] We'll have some different PO to get this done and for the custom charges, and then we'll we don't have any PO in our invoices.
+
+[00:14:42] Speaker 2: Yeah. So it could be like you've got multiple invoices against same PO.
+
+[00:14:46] Speaker 1: Right.
+
+[00:14:47] Speaker 2: Or for some charges, there is no PO at all. Right? Right. Agree. These typical scenarios.
+
+[00:14:57] Chika, so at this point of time, my GLR not getting impacted. Right? It will impact once the quality team approves this Miro entry. Right?
+
+[00:15:06] Speaker 1: Right.
+
+[00:15:10] Speaker 2: Got it. Yeah.
+
+[00:15:12] Speaker 1: So, Wendy, you can go ahead and show the next scenario.
+
+[00:15:19] Speaker 0: Okay. This one, I'm gonna show is from a freight vendor, and I'm gonna pull Mhmm. That one up right here. Trying to go back. We'll just start with a new one.
+
+[00:15:40] Speaker 1: It's gonna be empty.
+
+[00:15:42] Speaker 0: I was gonna pull would you is there one that you like, is there a scenario you would like me to show more so than anyone in particular or just
+
+[00:15:56] Speaker 1: You you have
+
+[00:15:56] Speaker 0: like, just
+
+[00:15:57] Speaker 2: plain ones.
+
+[00:15:58] Speaker 1: Have selected some scenarios. Right? Four to five invoices. We just have to show, the worker how we work and how, which are the scenarios we have in our system. I mean, we there can be a different scenarios as well, but there is some sample of scenarios how we work in the AP process.
+
+[00:16:17] Speaker 0: Okay. So I'm gonna pull out here's my next invoice I'm gonna put in. This one comes in. This one I'm gonna show you. There.
+
+[00:16:31] So this one is gonna belong to a blanket PO that we get multiple items shipped under.
+
+[00:16:42] Speaker 2: Okay.
+
+[00:17:10] Speaker 1: Emily, just show which are the parts we have in our invoice and how we see our invoice so that it could be clear. I mean Yes. I hope, Divakar, you know, I mean, we all know how to open this, PO for doing the. So which kind of invoices and, we have so I think that would be better so that you can explain some invoices, Emily. So
+
+[00:17:38] Speaker 0: Okay. Here's an invoice that
+
+[00:17:41] Speaker 2: But we have to we have to do it individually for each and every invoice. Right? Anil and Emily? Right.
+
+[00:17:48] Speaker 0: Okay. First. Correct.
+
+[00:17:49] Speaker 1: So we'll get the we we'll get the invoices on the email. So we'll see, which are the, for which of the invoices GRN is already done. So we'll see how I mean, the quality is completed. And after that, we do the Miro in the system.
+
+[00:18:11] Speaker 0: So this this invoice, we have coming in. It only has one of the items on the PO. So I'm going to deselect the items that I don't need. Need that one. I don't need that one.
+
+[00:18:36] Oh my invoice back up again. And so I just checked the number, and then I check the quantity on that one. And then the tax amount is $54.00 5. We make sure that it balances. So I put a wrong dollar amount in there, $7.17 $0.04.
+
+[00:19:26] Speaker 1: So, Emily, if you five. Select If you select this tax code and click on the checkbox calculator tax, so it will automatically calculate the tax. Like, we have B two in this line number. It will all automatic no. Just just click on the B two first.
+
+[00:19:49] Speaker 0: Okay. So you want me to select this to bring this down. Correct?
+
+[00:19:52] Speaker 4: Select after after tax.
+
+[00:19:54] Speaker 1: V two. Mhmm. And then calculate click click on the calculate tax so it will automatically calculate the tax amount as per Okay.
+
+[00:20:05] Speaker 4: Of this this
+
+[00:20:13] Speaker 0: Okay. So it looks like the tax amount is different when I did the calculate because this says $54.00 5. So can I overwrite this once I've if I select that? Because I don't usually use that.
+
+[00:20:39] Speaker 1: Just uncheck this checkbox and then delete this tax amount. After that, it will automatically calculate the tax.
+
+[00:20:50] Speaker 0: Okay. Okay. So I'm gonna delete that. I've changed it to the b two.
+
+[00:20:56] Speaker 1: Yes. And you want me to yeah.
+
+[00:20:57] Speaker 0: You want me to recheck this calculate box?
+
+[00:21:00] Speaker 1: Yes. Yes. Click on this checkbox.
+
+[00:21:06] Speaker 0: Okay. There
+
+[00:21:09] Speaker 1: is some other tags as well.
+
+[00:21:16] Speaker 0: It states no.
+
+[00:21:26] Speaker 3: There is some freight value as well. Right? There?
+
+[00:21:30] Speaker 0: Yes. Mhmm. It's $48.30. Okay. Let me change that quantity.
+
+[00:21:55] Speaker 3: Will we select line number four or line number six? I think we'll select line number six. Right?
+
+[00:22:00] Speaker 1: Yes. The quantity is same.
+
+[00:22:04] Speaker 3: Yeah. The material code has to be same, I think.
+
+[00:22:09] Speaker 0: Okay.
+
+[00:22:12] Speaker 4: And the amount in freight?
+
+[00:22:14] Speaker 0: $48.39.
+
+[00:22:17] Speaker 2: Right?
+
+[00:22:17] Speaker 1: Let me just change the tax code in freight as well. It might change this total tax amount.
+
+[00:22:27] Speaker 0: Yeah. It's not calculating correctly, and I cannot change any other amount.
+
+[00:22:37] Speaker 1: No. Just change the tax code from V0 to B2.
+
+[00:22:44] Speaker 0: Mhmm.
+
+[00:22:47] Speaker 1: So it will Okay. Now it says that's not checks just uncheck the checks checkbox and then click again. Yeah. So it will calculate the price.
+
+[00:23:03] Speaker 0: So we don't ever do this when we process. I've never done this. I wasn't trained to use this box or to do it this way. Me nor Wendy did it that way. So it's still when you're having to do it this way, it's not balancing.
+
+[00:23:36] Okay. Is that working now?
+
+[00:23:45] Speaker 1: You can now change the freight amount as we have in the system. 49.
+
+[00:23:50] Speaker 0: Right. Was it it was $48.39?
+
+[00:23:56] Speaker 1: Right. Okay.
+
+[00:24:01] Speaker 4: Click on text only.
+
+[00:24:05] Speaker 0: There we go. Now it's
+
+[00:24:07] Speaker 1: Now now it's it's done now.
+
+[00:24:10] Speaker 4: Mhmm.
+
+[00:24:11] Speaker 1: Now you can see here, the tax is automatically calculated.
+
+[00:24:15] Speaker 4: First of all, simulate this document. Before posting, simulate document.
+
+[00:24:21] Speaker 1: Yes. Simulate this document so that we can see. Still, we have QM decision is pending here.
+
+[00:24:32] Speaker 0: Okay. They were supposed to have done that one already. Let's see if we can get another one.
+
+[00:24:48] Speaker 3: So one quick question. In case there is any discrepancy in the tax value which is getting calculated and what is there on the invoice, does that any kind of situation occur sometimes?
+
+[00:25:01] Speaker 1: If there is a huge difference in the tax amount and then so we'll check, with the our stores team, and then we'll have to connect to the vendor that this kind of what which kind of a tax they have calculated in their invoices so that they can immediately update the PO accordingly after getting the email, received from the vendor? I mean, here, we can
+
+[00:25:29] Speaker 4: see Is
+
+[00:25:30] Speaker 3: there a tolerance limit?
+
+[00:25:32] Speaker 1: Yes. There may be a tolerance limit of, some dollar. You can see here we already have, 60 some dollar amount for the freight, and we we
+
+[00:25:44] Speaker 4: Yeah. To be ready, mean.
+
+[00:25:46] Speaker 1: We we we got the tax amount as 48.39 only.
+
+[00:25:55] Speaker 3: Okay. Can we see the invoice once again? Can I just see the invoice once again?
+
+[00:26:05] Speaker 0: Yeah. Let me look on that. Oh, I'm sorry. Trying to get back to it. There we go.
+
+[00:26:26] Speaker 3: Okay.
+
+[00:26:27] Speaker 1: Just trying to Emily, just maximize it so we can see the invoice.
+
+[00:26:34] Speaker 0: The home. Alright. Okay.
+
+[00:26:35] Speaker 3: Yeah. Let's just see the invoice for a moment. Calm down.
+
+[00:26:40] Speaker 5: It's 7. It's 20.
+
+[00:26:51] Speaker 6: It is 48. Stacks. Equal point six five.
+
+[00:27:00] Speaker 4: Create some zero. It's a zero.
+
+[00:27:05] Speaker 3: Okay. And there is a discount value as well, dollars. Am I correct? Is this getting captured somewhere?
+
+[00:27:22] Speaker 0: No. Generally, we do not get the GRNs and the the QMs done in time for us to be able to use the cash discount.
+
+[00:27:31] Speaker 4: You raise after adjustment to cash discount.
+
+[00:27:37] Speaker 3: Okay. So at the time of Mayro, when we are trying to look at these scenarios or any kind of automation as well, are we saying that we ignore this cash discount?
+
+[00:27:48] Speaker 1: No. We do not ignore this cash discount. Actually, we prepare that the PO as per the terms and conditions discussed. I think that this cash discount is already discussed, it's already considered in this PO amount. That is why you can see here, after getting this this freight amount and the total amount, we are getting, the variance as zero.
+
+[00:28:16] Speaker 3: Okay.
+
+[00:28:17] Speaker 1: So it's it's already considered after making the at the time of making this PO.
+
+[00:28:29] Speaker 2: Got it.
+
+[00:28:31] Speaker 1: Yes. And the terms and condition we have, it's it's written 1% on tenth and twenty fifth.
+
+[00:28:41] Speaker 3: Yeah. Understood. Got it.
+
+[00:28:43] Speaker 1: Yes. So
+
+[00:28:45] Speaker 3: you're saying the $717 is technically post discount?
+
+[00:28:50] Speaker 1: Yes.
+
+[00:28:52] Speaker 0: Okay.
+
+[00:28:56] Speaker 3: Understood.
+
+[00:29:00] Speaker 1: Yeah. These these these are the two I mean Yeah. These are the two examples. I mean, the simple examples how we get the invoices and how we do the MyRoom.
+
+[00:29:15] Speaker 3: Understood. Okay.
+
+[00:29:19] Speaker 1: So till now, is there any question? So on Yes,
+
+[00:29:23] Speaker 2: related to this invoice processing, just want to understand the approval workflow. But once you conclude this Miro, what is the approval workflow? You mentioned there is a one layer for quality. Right?
+
+[00:29:33] Speaker 1: Right.
+
+[00:29:34] Speaker 2: Do we have any checker layer as well? Like, typically, what happened, the MIRO entered might MIRO entered get parked in the SAP. Right? And someone Correct. From the finance team or from the management side will approve those MIRO entry before that hit the deals.
+
+[00:29:47] Speaker 1: No. There is no such kind of approval for the MIRO part. We have we just this is the only approval we required for QM. After that, we do the MIRO. It's already get posted in the system.
+
+[00:30:01] Speaker 2: Sorry. I'm getting confused a bit. So you complete the MIRO. Okay?
+
+[00:30:06] Speaker 1: Right.
+
+[00:30:07] Speaker 2: That post that, you need a quality approval. Right? The error the message that you that we see earlier on the MIRO screen. Right?
+
+[00:30:17] Speaker 1: After GRN, we get this message. I mean, when we start like, we have started in, to do the Miro here, we got the message for QM. After after processing of the QM, then we then only we process the Miro part. And after that, there is there is no approval. I mean, any leaders approval to approve this Miro that we have done.
+
+[00:30:42] There is no such kind of approval. There is only approval of QM or PRPO part. Mhmm. There is no approval for Miro. Just So We have to check the amount.
+
+[00:30:56] We have to check the freight tax amount, and there should not be any difference. I mean, the variance should always be zero.
+
+[00:31:08] Speaker 2: So once Emily concludes the, it hit my GL. There is no maker checker concept. And it's Right.
+
+[00:31:14] Speaker 1: As of now. Right.
+
+[00:31:21] Speaker 2: So do we do we have any reconciliation process in between to reconcile the open purchase order, open PRs, or open MIRO entries, open invoices?
+
+[00:31:33] Speaker 1: Yes. We do the reconciliation for this open MIRO part in the Excel. We download the report, and we check how much GRN has been done and how much amount of Miro is spending.
+
+[00:31:50] Speaker 2: K. And what is the frequency for this reconciliation, Anil?
+
+[00:31:55] Speaker 1: It's, once a week.
+
+[00:31:57] Speaker 2: Once a week.
+
+[00:31:58] Speaker 1: We are doing this. Yes.
+
+[00:32:01] Speaker 2: Got it.
+
+[00:32:03] Speaker 1: In this week, so we check how many, invoices we have received, how for that GRN has been done or not. So we'll connect the our team to do the GRN if we receive the invoice before GRN.
+
+[00:32:22] Speaker 6: Right.
+
+[00:32:23] Speaker 1: So for any reason, there could be a chance that we receive the invoice first, and after that, that our team do the GRN of this part, QM, and then Emily and our work starts for the Miro.
+
+[00:32:41] Speaker 2: So this reconciliation will perform on a weekly visit. That is clear?
+
+[00:32:45] Speaker 1: Yes.
+
+[00:32:50] Speaker 2: So, Anir, one question. So are we getting all this invoice over an email only, or do we have any vendor portal as well where the vendor can upload their emails?
+
+[00:32:58] Speaker 1: We get no. We get all the invoices on our email. We have a separate email box, j p u a p, where we get all the emails for the invoices, any vendor query.
+
+[00:33:11] Speaker 2: Mhmm. Got it. We do not have any vendor portal. Right?
+
+[00:33:20] Speaker 1: No.
+
+[00:33:22] Speaker 2: Got it.
+
+[00:33:26] Speaker 0: Yeah. Baram,
+
+[00:33:29] Speaker 2: you were saying something. Sorry. I cut you.
+
+[00:33:32] Speaker 3: No. So my question was very simple that if you automate this and there is a sales tax gap of, say, here, it's $54.65. And, say, by chance in this invoice, it was mentioned $54.55. Are we supposed to process the invoice or flag the invoice?
+
+[00:33:55] Speaker 1: We are so there, I mean, there should be an approval part in between if you are going to this, I mean, automate this. So there should there must be some we'll discuss with with Vikas, sir, for the threshold limit. I mean Understood. So that was my question today. $10.10 20¢, there would not be an issue.
+
+[00:34:18] We can go ahead and process the Miro. But So for the threshold part, I mean, the limit, because sir has the authority, he can decide how much should be the limit in this at the time of Miro. So we'll I mean, we can discuss it with him for the threshold limit.
+
+[00:34:40] Speaker 3: No problem. My question was, is there a limit today when you are passing it manually?
+
+[00:34:45] Speaker 1: One to two dollar would be fine, but more than that, we'll have to discuss with him.
+
+[00:34:51] Speaker 3: Understood. That's what I'm checking that what is the general parlance today. Obviously, all that would be discussed separately, but trying to understand the mechanism today. And just understanding it correctly, what you just mentioned that GRN, QM approval, and then it's what your Miro part starts. But say sometimes when you already received the email invoice on the email and you are trying to do the Miro, you get this notification QM is pending.
+
+[00:35:20] Then, technically, you have to do it later again and not at this point of time.
+
+[00:35:24] Speaker 4: Is that correct? So
+
+[00:35:28] Speaker 1: there should I mean, there must be a report in the SAP, where it shows I mean, we have in our system on the daily basis, we get, the report for the QM pendings.
+
+[00:35:41] Speaker 3: Understood.
+
+[00:35:42] Speaker 1: So user gets this report and, do the QM accordingly.
+
+[00:35:49] Speaker 3: Understood. So you would take up those entities for whom the QM is done, but your Miro is pending? Yes. Got it. We can proceed.
+
+[00:36:02] Can we see a scenario where, you have the import one and probably, you know, multi vendor against a single
+
+[00:36:11] Speaker 0: PO?
+
+[00:36:12] Speaker 1: Emily? Yes. Do you have the scenario?
+
+[00:36:16] Speaker 0: Okay. I have Yes.
+
+[00:36:20] Speaker 1: Different I mean, freight will for the same deal?
+
+[00:36:24] Speaker 0: Full customs.
+
+[00:36:25] Speaker 1: Yes. You can share this.
+
+[00:36:29] Speaker 0: Yes. So
+
+[00:36:33] Speaker 3: yes.
+
+[00:36:45] Speaker 0: Here's the invoice. I need my my SAP timed out. So let me log back in, but here's the invoice.
+
+[00:36:51] Speaker 3: Okay.
+
+[00:36:52] Speaker 0: And this one is going to so all the PO is on this invoice. That's on this invoice. It's gonna belong to a different vendor.
+
+[00:37:02] Speaker 2: Okay.
+
+[00:37:02] Speaker 0: It's gonna belong to the vendor who we initially purchased it from. So once I get logged in, I'll pull that.
+
+[00:37:37] Speaker 5: Gosh.
+
+[00:37:44] Speaker 0: Sorry about that, guys. Okay. So this is what it pulls up. And you put that purchase order number in. So the purchase order belongs to that's who we imported it from.
+
+[00:39:20] And so when we're processing one like this, here's what the invoice looks like. We have to go here to the details part over here, and we would we have to change it to the invoicing party so that this is where we would put the bold customs in. So what we have to do here is we have to figure out the the different charges here and what we do and when we do that, we use this we use this line item here. One, two, and three, that's where we manually add those charges in this area is here. So we have a a spreadsheet that would break it down, but This area here.
+
+[00:41:10] And I wanna make sure and, you know, am I doing or is this is this the way that I'm supposed to process these? Am I doing it correctly? I wanna make sure that I'm showing everybody the right way.
+
+[00:41:32] Speaker 4: Emily, first of all, click PO. Check only, first of all, in case of custom. Mhmm. Click on view.
+
+[00:41:44] Speaker 2: Check view.
+
+[00:41:46] Speaker 1: Purchase order. Yes. Yes. Yes.
+
+[00:42:01] Speaker 0: Okay. What are you wanting me to show them from there? So And so this was going to be this is an an separate invoice. Did this is later? Did it I'm sorry?
+
+[00:42:31] No. So what I did is I I'm sorry. You are breaking up.
+
+[00:42:39] Speaker 1: No. Emily, go ahead and do how
+
+[00:42:41] Speaker 0: you work for this. So I go in, and I see what the other charges were previous to previous to this invoice because we'll get multiple invoices for imports under that same PO because we might import many different parts or many different items that would fall under that. So I always go and I look at the previous the previous invoices that we received on that. And and this just also helps me check-in my brain to make sure that we that we are using the right vendor for this because sometimes we will get invoices from the imports to where a wrong PO number will have been used. So that's why I always go back and check and check-in this screen.
+
+[00:43:45] And then I go back to my model, and then so I make sure that I don't check the item because I'm not receiving that. And then what I do is I will manually add up to makes like, so I'll just see what line items were exactly for freight and not to import here. Like so, like, the this these fees right here for the flatbed delivery. So the flatbed delivery, I'll separate those fees. And along with these service fees right here, I will separate those.
+
+[00:44:26] So I have a calculator that I put the invoice total in, and then I take away those fees that are on there. I'm taking away the 526Point26. And then $25.45 and then $1.49 82. That's how we would change it there. And then here is where we would manually type in the the amount.
+
+[00:46:07] Somebody tell me why Keith I've never got that warning before on this one. Can y'all can you tell me what that means? Is it is it just telling me that this first one is it not gonna let me proceed with that, or can I still do it this way?
+
+[00:46:24] Speaker 1: It's showing the message that first line will be ignored.
+
+[00:46:29] Speaker 0: Yes. But it's not letting me get past that. What I've never had this error before. Is there a way for me to I've never seen that before. Is there a way for me to get around that?
+
+[00:46:42] Speaker 1: Maybe you'll have to add the quantity as well in this freight and CHE charges. That is why it's getting Okay.
+
+[00:46:49] Speaker 0: I'm not sure. I've never gotten that before.
+
+[00:46:56] Speaker 1: Just add the quantity as per the amount. Just It's
+
+[00:47:05] Speaker 0: so complete. Stopping me there. I don't know why it's doing what is
+
+[00:47:10] Speaker 1: Just don't do this, Myro, actually.
+
+[00:47:13] Speaker 0: Mhmm. Here we go. We can change this. Okay. So we would add that there.
+
+[00:47:41] Speaker 4: And we we added Mhmm.
+
+[00:47:43] Speaker 1: The quantity part as well.
+
+[00:47:46] Speaker 0: As well? Sorry about that. It keeps giving me an error, and it's not letting me move on. And I've I've never seen that error before. It's not allowing me to
+
+[00:48:01] Speaker 1: You are trying to edit in the net price. It should be edit in the quantity. This is the net price, and, yes, this is the quantity. You can add in it.
+
+[00:48:14] Speaker 0: Okay. So that make the error message go away? It's not. Okay. And should I uncheck
+
+[00:48:25] Speaker 4: this one? Proportionality.
+
+[00:48:27] Speaker 1: Emily, should be proportionately divided as per the amount received and the b and commission value.
+
+[00:48:36] Speaker 0: Right. It's not letting me. So what do I do from here? And we should like I said, I've never got that I've never got that error message before, and I don't believe Wendy told me what to do if that ever happened. Should we go on should we try a different one?
+
+[00:49:01] Or
+
+[00:49:03] Speaker 1: It should not let you do this with one quantity. Any of it.
+
+[00:49:17] Speaker 0: 8Point08. 8Point026.
+
+[00:49:32] Speaker 4: K.
+
+[00:49:32] Speaker 0: So when I get to this point this part, guys, I'm I'm kinda stuck
+
+[00:49:36] Speaker 4: here. Somebody.
+
+[00:49:37] Speaker 0: I've never came across this before. Could we just try a different one? Because it's not letting me.
+
+[00:49:54] Speaker 1: Just, now you can
+
+[00:50:06] Speaker 0: This is my error message that I'm getting.
+
+[00:50:16] Speaker 1: Just increase the quantity. Maybe
+
+[00:50:19] Speaker 0: Increase the quantity. Maybe that'll okay.
+
+[00:50:22] Speaker 1: Yes. Was
+
+[00:50:24] Speaker 0: Should I do, like, point five? Because I was coming up with point zero two six. Is that not going to work? It's not gonna work either.
+
+[00:51:10] Speaker 1: Emily, I think the quantity is already being used. And, Nwakar, I hope you understand the process, how it works. There is an issue in this invoice.
+
+[00:51:23] Speaker 0: In this particular one. I'm so I'm sorry. I've never
+
+[00:51:26] Speaker 2: No issue. No issue. No issue. No issue.
+
+[00:51:28] Speaker 1: How Okay. How how it works? I mean, there should be a freight value. It should be the quantity should be calculated as per the amount of freight received, then we'll have to change the details as per the vendor that Emily has shown you. After that, we'll simulate this and process it.
+
+[00:51:48] There might be some cases where we get this, where the quantity is, I think, used. So we'll have to connect to the procurement team to increase the quantity.
+
+[00:51:57] Speaker 4: And the amount.
+
+[00:51:58] Speaker 1: Quant and the amount, it's showing that we have increased the 20% limit. There is a limit, so we'll have to increase that limit in PO. After that, we can go ahead with the this amount. If we'll do the Miro with the difference, then it can go in the rounding off charges.
+
+[00:52:22] Speaker 2: No idea that you have to modify the PO accordingly.
+
+[00:52:25] Speaker 1: Right. Right. Right. We'll have to connect, who has created this PO. We'll con have to modify this
+
+[00:52:32] Speaker 4: We need the payment.
+
+[00:52:34] Speaker 1: The limit of the freight, and then we can go ahead. I hope you have understood already the process, how it works, how we get the invoice amount invoice, and, how we'll have to see this and how we change change the vendor code in it.
+
+[00:52:54] Speaker 2: Yes. I'm clear on your Miro part. I believe we need one more session on the payment side, your payment processing.
+
+[00:53:04] Speaker 1: Payment processing.
+
+[00:53:06] Speaker 2: Right. Post Miro, once we you process the payment for your vendors?
+
+[00:53:11] Speaker 1: Payments, we process in the advance depending upon the terms and condition of the PO.
+
+[00:53:18] Speaker 2: Yes. So the vendor those are advanced adjustments, your bank payments, and the vendor reconciliation. It's all part of your AP only. AP process. Right?
+
+[00:53:26] So we need I believe we need one more session to understand that part. Okay. We are running short of time today. It's already Yes. We have a hard stop at eleven IST.
+
+[00:53:37] Speaker 1: Yes.
+
+[00:53:38] Speaker 2: So, like, if all of you are available, we can connect tomorrow same time. He works with everyone.
+
+[00:53:43] Speaker 1: Let me discuss it with Vikas, sir, and I'll get back to you. I'll email you.
+
+[00:53:49] Speaker 3: No problem.
+
+[00:53:50] Speaker 1: For this no issue. Let me discuss it with him. So if you want, I can share, this invoices with you so that you can Yeah. Better understand how it works and how the invoices we get.
+
+[00:54:07] Speaker 3: Yeah. Invoices as well as the recording once it's available to you. If you can
+
+[00:54:12] Speaker 2: share And the microcopies and the microcopies as well, Anurag, in PDF.
+
+[00:54:17] Speaker 1: Microcopies PDF. Let me
+
+[00:54:20] Speaker 0: see. Yep.
+
+[00:54:21] Speaker 2: You get that similar similar entry in the SAP once you complete the MIRO. So I need a copy of that simulation entry as well so that I can match the MIRO with the invoice.
+
+[00:54:38] Speaker 1: Yes. So let me let me see. Let me discuss it with Vikash, sir, and I'll get back to you. The invoices Sure, sir. Will be shared after this call to you.
+
+[00:54:54] And you can, I think, check on this this part, the recording on the Teams? I think you will be asked for this authorization. Just click on that so I can authorize you from here so you can see on your Teams.
+
+[00:55:15] Speaker 2: No. No. No. Once you complete your Myro interview, there is a simulated entry with how the entry will look like in
+
+[00:55:23] Speaker 1: a Simulated entry? I understood. Mhmm. I'll check-in. No.
+
+[00:55:26] This recording part. You're saying the recording part?
+
+[00:55:29] Speaker 2: This recording will be made.
+
+[00:55:31] Speaker 1: Ah, so you will get it on your Teams. I think you will be required you, this authorization part so I can authorize you from here.
+
+[00:55:40] Speaker 2: Sure. Thanks.
+
+[00:55:41] Speaker 1: So you can see on your Teams. Let me discuss it with regards to the invoices part, the simulation, and the entry generated after it. Right. Right.
+
+[00:55:55] Speaker 2: And the the payment processing, you have to check with the. Right?
+
+[00:55:59] Speaker 1: Yes. Is there any question, tell I mean, how it works, the Miro part?
+
+[00:56:08] Speaker 2: No. No. I'm clear on the Miro part. If we have any question post on this post post having a look at your data, we'll definitely get back to you.
+
+[00:56:15] Speaker 1: Sure. Sure. Okay.
+
+[00:56:19] Speaker 2: Thank you. Alright.
+
+[00:56:20] Speaker 3: Thank you. Everyone.
+
+[00:56:21] Speaker 2: Thank you, everyone.
+
+[00:56:23] Speaker 1: Okay. Bye. Bye.
+
+[00:56:26] Speaker 0: Thank you.

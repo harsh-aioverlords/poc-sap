@@ -1,0 +1,110 @@
+{
+  "_comment": [
+    "GRN and QM (quality) status per PO line. This data lives in SAP, not in the",
+    "invoice/PO PDFs, so it is seeded here for the POC. The QM gate (R1) is the",
+    "rule the client demonstrated on the discovery call: MIRO cannot post until",
+    "the end user clears quality. Toggle qm_status in the Exceptions page to",
+    "release a hold live during a demo."
+  ],
+  "statuses": [
+    {
+      "po_number": "4745000031",
+      "line_no": "00010",
+      "grn_no": "5000184412",
+      "qty_received": 1.0,
+      "posting_date": "2026-06-18",
+      "qm_status": "pending",
+      "note": "Import slitter assembly received; quality inspection not yet cleared. Goods line qty fully consumed by GRN — this is why forcing customs charges onto it fails in SAP."
+    },
+    {
+      "po_number": "4741030582",
+      "line_no": "00010",
+      "grn_no": null,
+      "qty_received": 0.0,
+      "posting_date": null,
+      "qm_status": "not_required",
+      "note": "Sleeve not yet delivered; PO line stays open."
+    },
+    {
+      "po_number": "4741030582",
+      "line_no": "00020",
+      "grn_no": null,
+      "qty_received": 0.0,
+      "posting_date": null,
+      "qm_status": "not_required",
+      "note": "Seal kit not yet delivered; PO line stays open."
+    },
+    {
+      "po_number": "4741030582",
+      "line_no": "00030",
+      "grn_no": "5000186203",
+      "qty_received": 5.0,
+      "posting_date": "2026-07-08",
+      "qm_status": "released",
+      "note": "Filter elements received and quality released — clean domestic booking."
+    },
+    {
+      "po_number": "4745000208",
+      "line_no": "00010",
+      "grn_no": "5000185907",
+      "qty_received": 1.0,
+      "posting_date": "2026-06-24",
+      "qm_status": "released",
+      "note": "Band saw received and released."
+    },
+    {
+      "po_number": "4741030682",
+      "line_no": "00010",
+      "grn_no": "5000186044",
+      "qty_received": 2.0,
+      "posting_date": "2026-07-03",
+      "qm_status": "released",
+      "note": "Cabinets received; invoice carries freight the PO booked as Other Charges."
+    },
+    {
+      "po_number": "4741026212",
+      "line_no": "00090",
+      "grn_no": "5000186110",
+      "qty_received": 300.0,
+      "posting_date": "2026-07-07",
+      "qm_status": "released",
+      "note": "Masking tape received against line 00090."
+    },
+    {
+      "po_number": "4741027840",
+      "line_no": "00010",
+      "grn_no": "5000180221",
+      "qty_received": 2.0,
+      "posting_date": "2025-11-13",
+      "qm_status": "released",
+      "note": "Laser sensors received."
+    },
+    {
+      "po_number": "4743004148",
+      "line_no": "00020.1",
+      "grn_no": "5000186301",
+      "qty_received": 1.0,
+      "posting_date": "2026-06-27",
+      "qm_status": "not_required",
+      "note": "Service work order — no quality gate. Fuel surcharge confirmed."
+    },
+    {
+      "po_number": "4743004148",
+      "line_no": "00020.2",
+      "grn_no": null,
+      "qty_received": 0.0,
+      "posting_date": null,
+      "qm_status": "not_required",
+      "note": "Holdover charges not yet billed — line must stay OPEN (R3)."
+    },
+    {
+      "po_number": "4747000049",
+      "line_no": "00010",
+      "grn_no": "5000185500",
+      "qty_received": 10234.67,
+      "posting_date": "2026-05-02",
+      "qm_status": "released",
+      "note": "Intercompany coated pipe — partial receipt against a large open work order."
+    }
+  ]
+}

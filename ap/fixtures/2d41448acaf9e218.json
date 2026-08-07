@@ -1,0 +1,32 @@
+{
+  "_source_file": "RS Americas Inc Invoice-9021454336.pdf",
+  "cash_discount": 0,
+  "charges": [
+    {
+      "amount": 13.4,
+      "description": "Freight",
+      "kind": "freight"
+    }
+  ],
+  "due_date": "",
+  "grand_total": 202.18,
+  "invoice_date": "11/12/2025",
+  "invoice_no": "9021454336",
+  "lines": [
+    {
+      "amount": 176.0,
+      "description": "Photoelectric Sensor, Opposed, 2m, 10-30VDC, NPN/PNP, Cable, Q12",
+      "line_ref": "20",
+      "po_line_ref": "",
+      "qty": 2,
+      "unit_price": 88.0,
+      "uom": "EA",
+      "vendor_item_code": "70167361"
+    }
+  ],
+  "net_total": 189.4,
+  "payment_terms": "Net due in 30 days",
+  "po_number_raw": "4741027840",
+  "tax_amount": 12.78,
+  "vendor_name": "RS Americas Inc"
+}

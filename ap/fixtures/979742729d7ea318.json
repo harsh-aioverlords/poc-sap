@@ -1,0 +1,21 @@
+{
+  "_source_file": "Invoice-769984 Marion Fuel Surcharge.pdf",
+  "cash_discount": 0,
+  "charges": [
+    {
+      "amount": 100488.75,
+      "description": "Fuel Surcharge for Marion",
+      "kind": "other"
+    }
+  ],
+  "due_date": "7/26/26",
+  "grand_total": 100488.75,
+  "invoice_date": "6/26/2026",
+  "invoice_no": "",
+  "lines": [],
+  "net_total": 100488.75,
+  "payment_terms": "Net 30",
+  "po_number_raw": "4743004148",
+  "tax_amount": 0,
+  "vendor_name": "FREIGHT SOLUTIONS LLC"
+}
