@@ -15,10 +15,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from ap.ingest import invoice_po_reference, load_upload  # noqa: E402
-from ap.invoice_extract import extract_invoice, mode  # noqa: E402
+from ap.ingest import load_upload  # noqa: E402
+from ap.invoice_extract import extract_invoice  # noqa: E402
 from ap.miro import build_booking, post, simulate  # noqa: E402
-from ap.snapshot import available as pdfs_available  # noqa: E402
 from ap.store import Store  # noqa: E402
 
 st.set_page_config(page_title="AP Booking Agent — MIRO", layout="wide", page_icon="📄")
@@ -31,6 +30,14 @@ DISPOSITION = {
 }
 
 SEVERITY_ICON = {"block": "🔴", "hold": "🟠", "warn": "🟡", "info": "🔵"}
+
+MATCH_LABEL = {
+    "qty_price": "quantity & price",
+    "material_code": "item code",
+    "po_line_ref": "PO line reference",
+    "description": "description",
+    "unmatched": "no match",
+}
 
 
 # --- State ----------------------------------------------------------------
@@ -101,26 +108,9 @@ with st.sidebar:
         key="corpus_filter",
     )
 
-    extraction_mode = mode()
-    st.caption(
-        f"Extraction: **{extraction_mode}**"
-        + ("  ·  offline, cached" if extraction_mode == "fixtures" else "  ·  live API")
-    )
-    st.caption(
-        "Samples: **source PDFs**" if pdfs_available() else "Samples: **bundled snapshot**"
-    )
-
-    if st.button("↺ Reset ledger", width='stretch'):
+    if st.button("↺ Reset", width='stretch'):
         store.reset_ledger()
         st.rerun()
-
-    with st.expander("Scope"):
-        st.markdown(
-            "**In scope** — booking (MIRO): intake, extraction, PO resolution, "
-            "three-way match, tax codes, freight/customs, QM gate, tolerance, "
-            "staged single-click posting.\n\n"
-            "**Out of scope** — payments, F110/NACHA, reconciliation (Phase 2)."
-        )
 
 all_invoices = get_invoices(store)
 
@@ -133,11 +123,7 @@ else:
     visible = all_invoices
 
 with st.sidebar:
-    st.caption(
-        f"Showing **{len(visible)}** of {len(all_invoices)} invoices · "
-        f"**{len(store.po_master)}** POs"
-        + (f" (**{len(store.uploaded_pos)}** uploaded)" if store.uploaded_pos else "")
-    )
+    st.caption(f"{len(visible)} invoices · {len(store.po_master)} POs")
 
 results = bookings(store, visible)
 
@@ -146,17 +132,13 @@ results = bookings(store, visible)
 
 if page.endswith("Upload"):
     st.header("Upload documents")
-    st.caption(
-        "Drop in purchase orders and vendor invoices together — the agent decides "
-        "which is which from the document content, not the filename."
-    )
+    st.caption("Purchase orders and invoices, in any order.")
 
     uploaded = st.file_uploader(
         "Purchase orders and invoices (PDF)",
         type=["pdf"],
         accept_multiple_files=True,
         key="uploader",
-        help="Upload the PO first or the invoice first — order does not matter.",
     )
 
     c1, c2 = st.columns([1, 3])
@@ -189,11 +171,7 @@ if page.endswith("Upload"):
             st.error(f"⚠️ **{summary['filename']}** — {summary['detail']}")
 
     if st.session_state.get("upload_summaries"):
-        st.info(
-            "Switch to **Inbox** to see the triage verdict, then **Match Workbench** "
-            "and **MIRO Simulation** to walk the booking.",
-            icon="➡️",
-        )
+        st.info("Go to **Inbox** to see the result.", icon="➡️")
 
     st.divider()
 
@@ -234,12 +212,10 @@ if page.endswith("Upload"):
     # --- GRN / QM editor for uploaded POs ---
     if store.uploaded_pos:
         st.divider()
-        st.subheader("Goods receipt & quality status (uploaded POs)")
-        st.warning(
-            "GRN and QM status live in SAP, not in the PDFs. Uploaded POs are seeded as "
-            "**received in full, quality released** so they book straight through. "
-            "Change a line below to demonstrate the R1 quality hold or the R6 no-receipt block.",
-            icon="🧪",
+        st.subheader("Goods receipt & quality status")
+        st.caption(
+            "Not present in the PDFs — set here. Uploaded POs default to received "
+            "and quality released."
         )
         for po_number in sorted(store.uploaded_pos):
             po = store.po(po_number)
@@ -271,34 +247,14 @@ if page.endswith("Upload"):
                     store.set_qm_status(po_number, line.line_no, qm)
                     st.rerun()
 
-    with st.expander("How document type is decided"):
-        st.markdown(
-            "A **purchase order** is any document printing `Purchase Order No:` with a "
-            "10-digit SAP number — the Jindal PO template. Everything else is treated as a "
-            "**vendor invoice**.\n\n"
-            "This is content-based on purpose: in the bundled sample set the filenames are "
-            "misleading (`2600498-1.pdf` is a *purchase order* named after the invoice it "
-            "answers), so trusting filenames would mis-file documents.\n\n"
-            "Invoices are then linked to a PO by their printed reference, with the internal "
-            "`-BT04` / `-BT05` suffix stripped."
-        )
-
 
 # --- Page 1: Inbox --------------------------------------------------------
 
 elif page.endswith("Inbox"):
     st.header("Invoice Inbox")
-    st.caption(
-        "Simulates the shared `jpuap` AP mailbox. Every invoice is extracted, "
-        "matched to its PO, and triaged automatically."
-    )
 
     if not results:
-        st.info(
-            "No invoices match the current filter. Upload documents on the **Upload** page, "
-            "or set the sidebar filter to **Both**.",
-            icon="📤",
-        )
+        st.info("No invoices to show. Upload documents, or set the filter to **Both**.")
         st.stop()
 
     counts = {k: 0 for k in DISPOSITION}
@@ -329,29 +285,17 @@ elif page.endswith("Inbox"):
 
     st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
 
-    st.info(
-        "**Demo path** — `TX85-01021160` clean domestic booking · "
-        "`2600498-1` the multi-vendor import case · `769984` planned freight with a "
-        "line left open · `9972782578` grey-band variance · `KGC-26-2249` no PO reference.",
-        icon="🎯",
-    )
-
 
 # --- Shared invoice picker ------------------------------------------------
 
 else:
     if not results:
         st.header(page.split(" ", 1)[1])
-        st.info(
-            "No invoices to show. Upload a PO and an invoice on the **Upload** page, "
-            "or switch the document filter in the sidebar to **Both**.",
-            icon="📤",
-        )
+        st.info("No invoices to show. Upload documents, or set the filter to **Both**.")
         st.stop()
 
-    # Select by invoice number, not by label: the label carries a disposition
-    # icon that changes when a QM gate is released, which would otherwise drop
-    # the user's selection mid-demo.
+    # Select by invoice number, not label: the label carries a status icon that
+    # changes when a gate is released, which would drop the selection.
     numbers = list(results)
     # Drop a stale selection left behind when the corpus filter changes.
     if st.session_state.get("selected_invoice") not in numbers:
@@ -393,11 +337,7 @@ if page.endswith("Match Workbench"):
             }
         )
         if invoice.po_number_raw and invoice.po_number and invoice.po_number_raw != invoice.po_number:
-            st.success(
-                f"Suffix stripped: `{invoice.po_number_raw}` → `{invoice.po_number}` "
-                "(the dash portion is internal Jindal notation)",
-                icon="✂️",
-            )
+            st.success(f"PO number read as {invoice.po_number}", icon="✂️")
 
     with right:
         st.markdown("#### Purchase order")
@@ -415,11 +355,7 @@ if page.endswith("Match Workbench"):
                 }
             )
             if po.is_import:
-                st.warning(
-                    f"Import PO — vendor in {po.vendor_country}. Freight and customs "
-                    "arrive separately from other vendors.",
-                    icon="🌍",
-                )
+                st.warning(f"Import PO — vendor in {po.vendor_country}", icon="🌍")
 
     if po is not None:
         st.markdown("#### Line resolution")
@@ -430,7 +366,7 @@ if page.endswith("Match Workbench"):
                         {
                             "Invoice line": m.invoice_line_ref,
                             "→ PO line": m.po_line_no or "— unmatched —",
-                            "Tier": m.tier,
+                            "Matched on": MATCH_LABEL.get(m.tier, m.tier),
                             "Confidence": f"{m.confidence:.0%}",
                             "Inv qty": f"{m.invoice_qty:g}",
                             "PO qty": f"{m.po_qty:g}" if m.po_qty is not None else "—",
@@ -489,7 +425,6 @@ if page.endswith("Match Workbench"):
 
 elif page.endswith("MIRO Simulation"):
     st.header("MIRO — staged document")
-    st.caption("The agent stages the whole posting; a human commits it in one click.")
 
     icon, label, _ = DISPOSITION[result.disposition]
     st.subheader(f"{icon} {invoice.invoice_no} — {label}")
@@ -509,7 +444,7 @@ elif page.endswith("MIRO Simulation"):
         st.markdown("**Invoicing party**")
         st.write({"Invoice from": doc.invoicing_party, "PO raised on": doc.po_vendor or "—"})
         if doc.po_vendor and doc.invoicing_party and doc.po_vendor.upper()[:6] not in doc.invoicing_party.upper():
-            st.warning("Invoicing party switched on the Details tab (R7)", icon="🔀")
+            st.warning("Invoicing party switched", icon="🔀")
     with h3:
         st.markdown("**Amounts**")
         st.write(
@@ -524,9 +459,9 @@ elif page.endswith("MIRO Simulation"):
     if doc.unplanned_delivery_cost:
         ratio = (doc.unplanned_delivery_cost / po.total * 100) if po and po.total else 0
         st.info(
-            f"**Unplanned delivery cost: {money(doc.unplanned_delivery_cost)}** — "
-            f"{ratio:.2f}% of the {money(po.total) if po else '—'} PO value, within the 20% tolerance. "
-            "Booked on the header because the PO carries no freight/customs condition line.",
+            f"**Unplanned delivery cost {money(doc.unplanned_delivery_cost)}** — "
+            f"{ratio:.2f}% of PO value. No delivery-cost line on the PO, so it posts "
+            "on the header.",
             icon="📦",
         )
 
@@ -562,13 +497,10 @@ elif page.endswith("MIRO Simulation"):
         else:
             st.error(f"### Balance {money(balance)}")
     with b2:
-        st.caption(
-            "SAP will not post a MIRO whose balance is non-zero. "
-            "The agent recalculates tax and routes freight so the balance ties before a human sees it."
-        )
+        st.caption("The balance must be zero before a MIRO can post.")
 
     st.markdown("#### GL simulation")
-    st.caption("Illustrative account mapping for the POC — not client GL master data.")
+    st.caption("Illustrative accounts.")
     if doc.gl_preview:
         st.dataframe(
             pd.DataFrame(
@@ -644,11 +576,8 @@ elif page.endswith("Exceptions & Audit"):
         )
 
     st.divider()
-    st.subheader("Quality (QM) gate control")
-    st.caption(
-        "GRN and QM status live in SAP, so they are seeded for this POC. "
-        "Release a gate here and re-run the booking to see the hold clear."
-    )
+    st.subheader("Quality (QM) gate")
+    st.caption("Release a gate to clear the hold.")
 
     for status in store.grn:
         cols = st.columns([2, 2, 2, 2, 2])

@@ -1,10 +1,9 @@
 {
   "_comment": [
     "GRN and QM (quality) status per PO line. This data lives in SAP, not in the",
-    "invoice/PO PDFs, so it is seeded here for the POC. The QM gate (R1) is the",
-    "rule the client demonstrated on the discovery call: MIRO cannot post until",
-    "the end user clears quality. Toggle qm_status in the Exceptions page to",
-    "release a hold live during a demo."
+    "invoice/PO PDFs, so it is seeded here for the POC. MIRO cannot post until",
+    "quality is cleared (R1). Toggle qm_status in the Exceptions page to release",
+    "a hold."
   ],
   "statuses": [
     {
@@ -14,7 +13,7 @@
       "qty_received": 1.0,
       "posting_date": "2026-06-18",
       "qm_status": "pending",
-      "note": "Import slitter assembly received; quality inspection not yet cleared. Goods line qty fully consumed by GRN — this is why forcing customs charges onto it fails in SAP."
+      "note": "Import slitter assembly received; quality inspection not yet cleared. Goods line quantity fully consumed by the GRN."
     },
     {
       "po_number": "4741030582",

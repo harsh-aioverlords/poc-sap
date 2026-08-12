@@ -97,8 +97,8 @@ def classify_line(description: str, material_code: str = "") -> str:
 def parse_tax(tax_text: str) -> tuple[str, float]:
     """``Sales Tax @ 8.25% #(BT)`` -> ("B2", 0.0825); zero-tax -> ("V0", 0.0).
 
-    The client corrects V0 -> B2 by hand in MIRO today (notes.txt, 00:19:26);
-    deriving the expected code from the PO is what lets the agent do it.
+    Deriving the expected code from the PO is what lets the agent apply the
+    correct tax code instead of it being set by hand in MIRO.
     """
     text = (tax_text or "").strip()
     if not text or "ZERO" in text.upper() or "NO TAX" in text.upper():

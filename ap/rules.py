@@ -1,15 +1,15 @@
-"""Business rules R1-R7, each traceable to the discovery-call transcripts.
+"""Validation rules applied to a matched invoice.
 
-  R1  QM gate      — quality must clear before MIRO can post (notes.txt 00:11:04)
-  R2  Tax code     — V0 -> B2 correction and recalculation (notes.txt 00:19:26)
-  R3  Keep open    — freight lines billed later by a third party stay open (00:07:48)
-  R4  PO tolerance — ~20% breach needs a procurement PO amendment (00:51:57)
-  R5  Cash discount— already priced into the PO; never deducted (00:27:48)
-  R6  GRN first    — no goods receipt, no MIRO (00:12:54)
-  R7  Multi-vendor — invoicing party may differ from the PO vendor (00:37:02)
+  R1  QM gate      — quality must clear before MIRO can post
+  R2  Tax code     — correct the tax code and recalculate
+  R3  Keep open    — freight lines billed later by a third party stay open
+  R4  PO tolerance — a 20% breach needs a PO amendment
+  R5  Cash discount— already priced into the PO; never deducted
+  R6  GRN first    — no goods receipt, no MIRO
+  R7  Multi-vendor — invoicing party may differ from the PO vendor
 
 Each check returns Exception_ objects carrying the rule id, severity, evidence
-and a suggested action, so the UI can explain *why* something was held.
+and a suggested action, so the UI can explain why something was held.
 """
 
 from __future__ import annotations

@@ -1,15 +1,12 @@
 """Delivery-cost routing, tax recalculation, and tolerance bands.
 
-Two findings from the real documents drive this module:
+Two rules drive this module:
 
-1. **Tax base includes planned freight.** Motion invoice TX85-01021160:
-   goods 614.00 alone x 8.25% = 50.66, but the invoice says 54.65.
-   (614.00 + 48.39 freight) x 8.25% = 54.65 exactly. This reproduces the
-   "variance is zero" moment from the discovery call.
+1. The tax base is goods **plus planned freight**. Goods alone do not
+   reconcile to the tax printed on the invoice.
 
-2. **Cash discount is never subtracted.** It is already priced into the PO
-   ("it's already considered at the time of making this PO", notes.txt
-   00:27:48). Deducting Motion's 6.14 would break the balance.
+2. Cash discount is never subtracted — it is already priced into the PO,
+   so deducting it would break the balance.
 """
 
 from __future__ import annotations
@@ -25,9 +22,8 @@ DELIVERY_KINDS = {
     "transloading", "disbursement", "service_fee", "wire_fee",
 }
 
-# Tolerance bands. The manual tolerance today is ~$1-2 (notes.txt 00:34:45);
-# the PO tolerance is ~20% (notes.txt 00:51:57). These are different scales and
-# the client has not yet reconciled them — see the POC's open-questions note.
+# Tolerance bands. The manual tolerance is ~$1-2 absolute; the PO tolerance is
+# ~20% relative. These are different scales and the thresholds are not final.
 AUTO_POST_ABS = 2.00      # <= $2 absolute: post without review
 PO_TOLERANCE_PCT = 20.0   # > 20% of PO line value: hard SAP error
 
@@ -75,10 +71,9 @@ def route_charges(
     """Decide planned vs unplanned treatment for each charge.
 
     A charge is *planned* when the PO carries an open delivery-cost line it can
-    post against; otherwise it is *unplanned* and goes to the MIRO header. The
-    import case (PO 4745000031) has no such line at all, so its entire
-    $8,811.67 is unplanned — which is exactly what SAP requires and what the
-    manual attempt on the call did not do.
+    post against; otherwise it is *unplanned* and goes to the MIRO header. An
+    import PO with no freight or customs condition line therefore routes its
+    whole charge total to unplanned delivery cost.
     """
     plan = CostPlan(routings=[])
 
@@ -137,11 +132,7 @@ def expected_tax_code(po: PO, line_nos: list[str]) -> tuple[str, float]:
 
 
 def recalculate_tax(goods_total: float, planned_freight: float, rate: float) -> tuple[float, float]:
-    """Return (tax_base, tax_amount).
-
-    The base is goods **plus planned freight** — verified against the Motion
-    invoice, where freight-in-base is the only way to reach the printed 54.65.
-    """
+    """Return (tax_base, tax_amount). The base is goods plus planned freight."""
     base = round(goods_total + planned_freight, 2)
     return base, round(base * rate, 2)
 

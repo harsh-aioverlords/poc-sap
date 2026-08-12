@@ -21,12 +21,12 @@ DocKind = Literal["po", "work_order", "invoice"]
 
 DOCS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "poandinvoices")
 
-# A Jindal PO always prints this header field; vendor invoices never do.
+# A purchase order always prints this header field; vendor invoices never do.
 _PO_HEADER = re.compile(r"Purchase Order No\s*:\s*(\d{10})")
 _WORK_ORDER = re.compile(r"\bWORK ORDER\b")
 
-# 10-digit SAP PO numbers, optionally with the internal -BT04/-BT05 suffix that
-# Emily explained must be stripped before matching.
+# 10-digit SAP PO numbers, optionally with the internal -BT04/-BT05 suffix,
+# which is not part of the PO number and must be stripped before matching.
 PO_NUMBER = re.compile(r"\b(4\d{9})\b")
 PO_WITH_SUFFIX = re.compile(r"\b(4\d{9})(-[A-Z]{2}\d{2})?\b")
 
@@ -57,8 +57,8 @@ def classify(text: str) -> DocKind:
 def strip_po_suffix(raw: str) -> str | None:
     """``4741030582-BT04`` -> ``4741030582``; ``42259`` -> None.
 
-    The trailing dash portion is internal Jindal processing notation and must
-    not participate in matching (notes.txt, 00:01:47).
+    The trailing dash portion is internal processing notation and must not
+    participate in matching.
     """
     if not raw:
         return None

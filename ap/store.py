@@ -1,9 +1,8 @@
 """In-memory store: PO master, seeded GRN/QM status, and the consumption ledger.
 
-No database — this is a POC. But the consumption ledger *must* survive across
-invoices within a session, otherwise the multi-vendor demo cannot show a second
-invoice hitting a PO line whose quantity is already consumed (which is exactly
-what defeated the manual attempt on the discovery call).
+No database — this is a POC. The consumption ledger survives across invoices
+within a session so a second invoice sees a PO line whose quantity has already
+been consumed.
 """
 
 from __future__ import annotations

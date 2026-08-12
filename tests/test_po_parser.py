@@ -36,7 +36,7 @@ def test_corpus_splits_into_pos_and_invoices():
     ],
 )
 def test_po_suffix_stripping(raw, expected):
-    """The -BT04/-BT05 dash portion is internal notation (notes.txt 00:01:47)."""
+    """The -BT04/-BT05 dash portion is internal notation, not part of the PO."""
     assert strip_po_suffix(raw) == expected
 
 

@@ -1,9 +1,8 @@
 """Assemble, simulate and post a MIRO document.
 
-This is the screen the client watched their own team struggle with. The agent
-stages the whole document — invoicing party, line selection, unplanned delivery
-cost, recalculated tax — so the balance reads 0.00 and a human commits it in one
-click, exactly the "simulate before post" flow described on the call.
+The agent stages the whole document — invoicing party, line selection, unplanned
+delivery cost, recalculated tax — so the balance reads 0.00 and a human commits
+it in one click, following the simulate-before-post flow.
 
 No SAP connection: postings mutate the in-session consumption ledger.
 """

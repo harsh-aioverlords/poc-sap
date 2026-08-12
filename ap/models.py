@@ -1,8 +1,6 @@
 """Data model for the AP booking (MIRO) agent.
 
-Shapes follow the real Jindal Pipe USA documents in ``poandinvoices/`` and the
-business rules observed in the discovery calls (see notes.txt). Rule IDs R1-R7
-are referenced throughout and defined in ap/rules.py.
+Rule IDs R1-R7 are referenced throughout and defined in ap/rules.py.
 """
 
 from __future__ import annotations
@@ -243,7 +241,7 @@ class Exception_(BaseModel):
 class MiroLine(BaseModel):
     po_line_no: str | None = None
     description: str = ""
-    selected: bool = False          # the checkbox Emily toggles in SAP
+    selected: bool = False          # the line-selection checkbox in MIRO
     qty: float = 0.0
     amount: float = 0.0
     tax_code: str = "V0"
