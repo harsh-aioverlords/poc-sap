@@ -30,22 +30,22 @@ Nothing is posted to SAP. Everything is simulated on screen.
 
 | Screen | Purpose |
 | --- | --- |
+| Exceptions & Audit | Matching results for every invoice (opens here) |
 | Upload | Add your own POs and invoices |
 | Inbox | All invoices and their status |
-| Match Workbench | How each invoice matched its PO |
+| Match Workbench | How one invoice matched its PO |
 | MIRO Simulation | The staged posting |
-| Exceptions & Audit | Everything held, grouped by reason |
 
 ---
 
 ## Status colours
 
-| | Meaning |
-| --- | --- |
-| 🟢 Ready to post | Everything matches |
-| 🟡 Needs review | Posts, but worth a look |
-| 🟠 Held | Quality pending, or over tolerance |
-| 🔴 Blocked | No PO reference, or goods not received |
+|                  | Meaning                                |
+| ---------------- | -------------------------------------- |
+| 🟢 Ready to post | Everything matches                     |
+| 🟡 Needs review  | Posts, but worth a look                |
+| 🟠 Held          | Quality pending, or over tolerance     |
+| 🔴 Blocked       | No PO reference, or goods not received |
 
 Red and orange rows are expected. Those are the cases the system caught.
 
@@ -99,8 +99,9 @@ Adding those lines to the import PO template would remove this at source.
 Same invoice, `2600498-1`
 
 1. Click **Post MIRO** → refused, quality pending
-2. Go to **Exceptions & Audit** → PO 4745000031 / line 00010 → **Release QM**
-3. Return and click **Post MIRO** → posts
+2. Go to **Upload** → Goods receipt & quality status → PO 4745000031 / line
+   00010 → set QM to **released**
+3. Return to **MIRO Simulation** and click **Post MIRO** → posts
 
 In production this status is read from SAP. The button is here so you can see
 both sides.
@@ -109,13 +110,13 @@ both sides.
 
 ## Test 4 — Other cases
 
-| Invoice | Vendor | What it shows |
-| --- | --- | --- |
-| `769984` | Freight Solutions | Freight matched exactly. Holdover line $20,400 left open for a later invoice. |
-| `9972782578` | Grainger | $259.69 freight with no PO line — 24% of a small PO, over tolerance. |
-| `9021454336` | RS Americas | PO says laser sensor @ $156.64, invoice says photoelectric @ $88.00. Held. |
-| `KGC-26-2249` | Katoen Natie | No PO number on the invoice. Blocked. |
-| `424543` | 3L Energy | PO field shows their order number, not ours. Blocked. |
+| Invoice       | Vendor            | What it shows                                                                 |
+| ------------- | ----------------- | ----------------------------------------------------------------------------- |
+| `769984`      | Freight Solutions | Freight matched exactly. Holdover line $20,400 left open for a later invoice. |
+| `9972782578`  | Grainger          | $259.69 freight with no PO line — 24% of a small PO, over tolerance.          |
+| `9021454336`  | RS Americas       | PO says laser sensor @ $156.64, invoice says photoelectric @ $88.00. Held.    |
+| `KGC-26-2249` | Katoen Natie      | No PO number on the invoice. Blocked.                                         |
+| `424543`      | 3L Energy         | PO field shows their order number, not ours. Blocked.                         |
 
 ---
 
@@ -151,11 +152,11 @@ Two tolerance limits are in use:
 These behave very differently on a $1,000 PO versus a $229,000 PO. The demo
 currently uses:
 
-| Variance | Action |
-| --- | --- |
-| Up to $2 | Post |
+| Variance  | Action          |
+| --------- | --------------- |
+| Up to $2  | Post            |
 | $2 to 20% | Flag for review |
-| Over 20% | Block |
+| Over 20%  | Block           |
 
 Please confirm what these should be.
 
@@ -163,11 +164,11 @@ Please confirm what these should be.
 
 ## If something looks wrong
 
-| Issue | Fix |
-| --- | --- |
-| Inbox empty | Set **Documents to show** to **Both** |
-| "Could not read this PDF" | Scanned file — digital PDFs only |
-| "PO not found" on upload | Upload the PO as well |
-| "Already posted" | Click **Reset** in the sidebar |
+| Issue                     | Fix                                  |
+| ------------------------- | ------------------------------------ |
+| Inbox empty               | Set**Documents to show** to **Both** |
+| "Could not read this PDF" | Scanned file — digital PDFs only     |
+| "PO not found" on upload  | Upload the PO as well                |
+| "Already posted"          | Click**Reset** in the sidebar        |
 
 Anything handled incorrectly — send us the document and what you expected.

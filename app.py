@@ -31,6 +31,9 @@ DISPOSITION = {
 
 SEVERITY_ICON = {"block": "🔴", "hold": "🟠", "warn": "🟡", "info": "🔵"}
 
+# Goods-receipt and quality status are process gates, not matching outcomes.
+NON_MATCHING_CODES = {"QM_PENDING", "QM_REJECTED", "NO_GRN"}
+
 MATCH_LABEL = {
     "qty_price": "quantity & price",
     "material_code": "item code",
@@ -88,11 +91,11 @@ with st.sidebar:
     page = st.radio(
         "Screen",
         [
+            "⚠️ Exceptions & Audit",
             "📤 Upload",
             "📥 Inbox",
             "🔗 Match Workbench",
             "🧾 MIRO Simulation",
-            "⚠️ Exceptions & Audit",
         ],
         label_visibility="collapsed",
     )
@@ -209,15 +212,16 @@ if page.endswith("Upload"):
         )
     st.dataframe(pd.DataFrame(inv_rows), width='stretch', hide_index=True)
 
-    # --- GRN / QM editor for uploaded POs ---
-    if store.uploaded_pos:
+    # --- GRN / QM editor ---
+    editable = sorted({g.po_number for g in store.grn} & set(store.po_master))
+    if editable:
         st.divider()
         st.subheader("Goods receipt & quality status")
         st.caption(
             "Not present in the PDFs — set here. Uploaded POs default to received "
             "and quality released."
         )
-        for po_number in sorted(store.uploaded_pos):
+        for po_number in editable:
             po = store.po(po_number)
             if not po:
                 continue
@@ -286,16 +290,16 @@ elif page.endswith("Inbox"):
     st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
 
 
-# --- Shared invoice picker ------------------------------------------------
+# --- Shared invoice picker (single-invoice pages only) --------------------
 
-else:
+elif page.endswith("Match Workbench") or page.endswith("MIRO Simulation"):
     if not results:
         st.header(page.split(" ", 1)[1])
         st.info("No invoices to show. Upload documents, or set the filter to **Both**.")
         st.stop()
 
     # Select by invoice number, not label: the label carries a status icon that
-    # changes when a gate is released, which would drop the selection.
+    # changes when a status changes, which would drop the selection.
     numbers = list(results)
     # Drop a stale selection left behind when the corpus filter changes.
     if st.session_state.get("selected_invoice") not in numbers:
@@ -541,83 +545,98 @@ elif page.endswith("MIRO Simulation"):
 elif page.endswith("Exceptions & Audit"):
     st.header("Exceptions & Audit")
 
-    by_rule: dict[str, list] = {}
+    st.caption("How each invoice matched its purchase order.")
+
+    if not results:
+        st.info("No invoices to show. Upload documents, or set the filter to **Both**.")
+        st.stop()
+
+    # --- Match summary, one row per invoice ---
+    summary = []
     for number, r in results.items():
-        for exc in r.doc.exceptions:
-            by_rule.setdefault(exc.rule_id or "—", []).append((number, exc))
+        icon, label, _ = DISPOSITION[r.disposition]
+        matched = [m for m in r.matches if m.po_line_no]
+        unmatched = [m for m in r.matches if not m.po_line_no]
+        if r.po is None:
+            outcome = "no PO"
+        elif not r.matches:
+            outcome = "charges only"
+        elif unmatched and not matched:
+            outcome = "no lines matched"
+        elif unmatched:
+            outcome = f"{len(matched)} of {len(r.matches)} lines matched"
+        else:
+            outcome = f"all {len(matched)} line(s) matched"
 
-    rule_names = {
-        "R1": "QM gate — quality must clear before MIRO",
-        "R2": "Tax code correction and recalculation",
-        "R3": "Freight lines kept open for later third-party invoices",
-        "R4": "PO tolerance, unplanned cost and quantity limits",
-        "R5": "Cash discount already priced into the PO",
-        "R6": "Goods receipt and PO reference required",
-        "R7": "Multi-vendor — invoicing party differs from the PO vendor",
-    }
-
-    for rule in sorted(by_rule):
-        st.subheader(f"{rule} — {rule_names.get(rule, 'other')}")
-        st.dataframe(
-            pd.DataFrame(
-                [
-                    {
-                        "Invoice": number,
-                        "Severity": f"{SEVERITY_ICON[e.severity]} {e.severity}",
-                        "Code": e.code,
-                        "Message": e.message,
-                        "Suggested action": e.suggested_action,
-                    }
-                    for number, e in by_rule[rule]
-                ]
-            ),
-            width='stretch',
-            hide_index=True,
+        summary.append(
+            {
+                "Invoice": number,
+                "Vendor": r.invoice.vendor_name[:26],
+                "PO": r.invoice.po_number or "—",
+                "Invoice total": money(r.invoice.grand_total),
+                "PO lines matched": outcome,
+                "Balance": money(r.doc.balance) if r.po else "—",
+                "Status": f"{icon} {label}",
+            }
         )
+    st.dataframe(pd.DataFrame(summary), width='stretch', hide_index=True)
 
-    st.divider()
-    st.subheader("Quality (QM) gate")
-    st.caption("Release a gate to clear the hold.")
+    # --- Line-level detail across every invoice ---
+    st.subheader("Line matching")
+    lines = []
+    for number, r in results.items():
+        for m in r.matches:
+            lines.append(
+                {
+                    "Invoice": number,
+                    "Invoice line": m.invoice_line_ref,
+                    "Qty": f"{m.invoice_qty:g}",
+                    "Amount": money(m.invoice_amount),
+                    "→ PO line": m.po_line_no or "— none —",
+                    "PO qty": f"{m.po_qty:g}" if m.po_qty is not None else "—",
+                    "PO amount": money(m.po_amount) if m.po_amount else "—",
+                    "Matched on": MATCH_LABEL.get(m.tier, m.tier),
+                    "Confidence": f"{m.confidence:.0%}",
+                }
+            )
+    if lines:
+        st.dataframe(pd.DataFrame(lines), width='stretch', hide_index=True)
+    else:
+        st.caption("No goods lines to match.")
 
-    for status in store.grn:
-        cols = st.columns([2, 2, 2, 2, 2])
-        cols[0].write(f"**{status.po_number}** / {status.line_no}")
-        cols[1].write(status.grn_no or "no GRN")
-        cols[2].write(f"qty {status.qty_received:g}")
-        cols[3].write(f"QM: **{status.qm_status}**")
-        if status.qm_status == "pending":
-            if cols[4].button("Release QM", key=f"qm-{status.po_number}-{status.line_no}"):
-                store.set_qm_status(status.po_number, status.line_no, "released")
-                st.rerun()
-        elif status.qm_status == "released":
-            if cols[4].button("Re-hold", key=f"hold-{status.po_number}-{status.line_no}"):
-                store.set_qm_status(status.po_number, status.line_no, "pending")
-                st.rerun()
+    # --- Charges: which found a PO line, which did not ---
+    charges = []
+    for number, r in results.items():
+        for routing in (r.plan.routings if r.plan else []):
+            charges.append(
+                {
+                    "Invoice": number,
+                    "Charge": routing.charge.description[:38],
+                    "Amount": money(routing.charge.amount),
+                    "→ PO line": routing.po_line_no or "— none —",
+                    "Treatment": routing.treatment,
+                }
+            )
+    if charges:
+        st.subheader("Freight & charges")
+        st.dataframe(pd.DataFrame(charges), width='stretch', hide_index=True)
 
-    st.divider()
-    st.subheader("PO consumption ledger")
-    ledger = [
+    # --- Everything the match could not settle ---
+    # Quality/receipt status is not a matching outcome, so it is excluded here.
+    st.subheader("Exceptions")
+    exceptions = [
         {
-            "PO": num,
-            "Line": l.line_no,
-            "Description": l.description[:38],
-            "PO qty": f"{l.qty:g}",
-            "Invoiced": f"{l.qty_invoiced:g}",
-            "Open qty": f"{l.qty_open:g}",
-            "Open value": money(l.amount_open),
-            "Keep open": "yes" if l.keep_open else "",
+            "Invoice": number,
+            "": SEVERITY_ICON[e.severity],
+            "Severity": e.severity,
+            "Finding": e.message,
+            "Note": e.suggested_action,
         }
-        for num, p in sorted(store.po_master.items())
-        for l in p.postable_lines()
+        for number, r in results.items()
+        for e in r.doc.exceptions
+        if e.code not in NON_MATCHING_CODES
     ]
-    st.dataframe(pd.DataFrame(ledger), width='stretch', hide_index=True)
-
-    if store.posted:
-        st.subheader("Posted this session")
-        st.dataframe(
-            pd.DataFrame(
-                [{"Invoice": k, "MIRO document": v} for k, v in store.posted.items()]
-            ),
-            width='stretch',
-            hide_index=True,
-        )
+    if exceptions:
+        st.dataframe(pd.DataFrame(exceptions), width='stretch', hide_index=True)
+    else:
+        st.caption("None.")

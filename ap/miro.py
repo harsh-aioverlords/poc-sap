@@ -225,8 +225,8 @@ def _finalize(doc: MiroDoc, po: PO) -> None:
                 severity={"auto": "info", "review": "warn", "block": "hold"}[band],
                 message=f"MIRO balance is ${balance:,.2f}, not zero — {explanation}",
                 suggested_action=(
-                    "Post to rounding difference." if band == "auto"
-                    else "Investigate the variance with the vendor or procurement before posting."
+                    "Within tolerance — posts to rounding difference." if band == "auto"
+                    else "Invoice total does not agree with the matched PO lines."
                 ),
                 evidence={"balance": balance, "band": band},
             )

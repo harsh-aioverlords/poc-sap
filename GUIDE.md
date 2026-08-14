@@ -35,14 +35,18 @@ multi-currency.
 
 | Screen | Purpose |
 | --- | --- |
-| Upload | Add POs and invoices; set GRN/QM on uploaded POs |
+| Exceptions & Audit | Default page. Matching results across all invoices: summary, line matching, charge routing, exceptions |
+| Upload | Add POs and invoices; set GRN/QM per PO line |
 | Inbox | All invoices with status |
-| Match Workbench | Line resolution, charge routing, exceptions |
+| Match Workbench | Line resolution and exceptions for one invoice |
 | MIRO Simulation | Staged document, balance, GL preview, post |
-| Exceptions & Audit | Grouped by rule; QM toggles; consumption ledger |
 
 Sidebar: filter between uploaded and sample documents; **Reset** rewinds
 postings.
+
+Goods-receipt and quality status are process gates rather than matching
+outcomes, so they are set on the Upload page and excluded from the Exceptions
+table.
 
 ---
 
@@ -71,7 +75,7 @@ postings.
 ### 3. Quality gate — same invoice
 
 - Post refused while QM is pending
-- Release on **Exceptions & Audit** → posts
+- Set QM to released on **Upload** → posts
 
 ### 4. Planned freight — `769984` (Freight Solutions, $100,488.75)
 

@@ -22,8 +22,8 @@ DELIVERY_KINDS = {
     "transloading", "disbursement", "service_fee", "wire_fee",
 }
 
-# Tolerance bands. The manual tolerance is ~$1-2 absolute; the PO tolerance is
-# ~20% relative. These are different scales and the thresholds are not final.
+# Tolerance bands. Two scales are in play — a small absolute amount and a
+# percentage of PO value. The thresholds are not final.
 AUTO_POST_ABS = 2.00      # <= $2 absolute: post without review
 PO_TOLERANCE_PCT = 20.0   # > 20% of PO line value: hard SAP error
 
@@ -146,11 +146,11 @@ def tolerance_band(difference: float, po_value: float) -> tuple[str, str]:
     if diff < 0.005:
         return "auto", "no variance"
     if diff <= AUTO_POST_ABS:
-        return "auto", f"${diff:,.2f} is within the ${AUTO_POST_ABS:,.2f} manual tolerance"
+        return "auto", f"${diff:,.2f} is within the ${AUTO_POST_ABS:,.2f} tolerance"
     pct = (diff / po_value * 100) if po_value else 0.0
     if pct > PO_TOLERANCE_PCT:
         return "block", f"${diff:,.2f} is {pct:.1f}% of PO value — beyond the {PO_TOLERANCE_PCT:.0f}% PO tolerance"
-    return "review", f"${diff:,.2f} ({pct:.2f}% of PO value) exceeds the ${AUTO_POST_ABS:,.2f} manual tolerance"
+    return "review", f"${diff:,.2f} ({pct:.2f}% of PO value) exceeds the ${AUTO_POST_ABS:,.2f} tolerance"
 
 
 def unplanned_cost_ratio(amount: float, po: PO) -> float:

@@ -33,7 +33,7 @@ def check_grn(store: Store, po: PO, line_nos: list[str]) -> list[Exception_]:
                     severity="block",
                     message=f"No goods receipt posted for PO line {line_no}"
                     + (f" ({line.description})" if line else ""),
-                    suggested_action="Ask the stores team to post the GRN, then re-run the booking.",
+                    suggested_action="Cannot post until the goods receipt exists.",
                     evidence={"po_number": po.po_number, "line_no": line_no},
                 )
             )
@@ -54,8 +54,8 @@ def check_qm(store: Store, po: PO, line_nos: list[str] | None) -> list[Exception
                 code="QM_PENDING" if status.qm_status == "pending" else "QM_REJECTED",
                 rule_id="R1",
                 severity="hold",
-                message=f"Quality decision {status.qm_status} on PO line {status.line_no} — MIRO cannot post yet",
-                suggested_action="Email the end user to complete the QM decision; the invoice stays in the hold queue.",
+                message=f"Quality decision {status.qm_status} on PO line {status.line_no}",
+                suggested_action="MIRO cannot post until quality is cleared.",
                 evidence={
                     "po_number": po.po_number,
                     "line_no": status.line_no,
@@ -86,10 +86,7 @@ def check_vendor(invoice: Invoice, po: PO) -> list[Exception_]:
                 f"Invoice is from {invoice.vendor_name}, but PO {po.po_number} "
                 f"was raised on {po.vendor_name}"
             ),
-            suggested_action=(
-                "Switch the invoicing party on the MIRO Details tab to the invoice vendor. "
-                "This is the expected multi-vendor pattern for imports (freight, customs, brokerage)."
-            ),
+            suggested_action="Invoicing party set to the invoice vendor.",
             evidence={"invoice_vendor": invoice.vendor_name, "po_vendor": po.vendor_name},
         )
     ]
@@ -113,9 +110,9 @@ def check_delivery_cost_structure(invoice: Invoice, po: PO, plan: CostPlan) -> l
                 f"line on PO {po.po_number} ({ratio:.2f}% of PO value)"
             ),
             suggested_action=(
-                "Post as unplanned delivery cost on the MIRO header — do NOT select the goods line. "
+                "Posted as unplanned delivery cost on the header; the goods line is not selected."
                 if within
-                else "Unplanned cost exceeds the PO tolerance; route to procurement for a PO amendment. "
+                else "Exceeds the PO tolerance — the PO needs amending."
             ),
             evidence={
                 "unplanned_total": plan.unplanned_total,
@@ -135,13 +132,10 @@ def check_delivery_cost_structure(invoice: Invoice, po: PO, plan: CostPlan) -> l
                 rule_id="R4",
                 severity="info",
                 message=(
-                    f"PO {po.po_number} is an import PO raised '{po.price_basis}' with no freight or "
-                    "customs condition lines, so every downstream customs invoice is structurally unmatched."
+                    f"PO {po.po_number} is an import PO raised '{po.price_basis}' with no freight "
+                    "or customs lines, so those charges cannot match a PO line."
                 ),
-                suggested_action=(
-                    "Procurement fix: add freight/customs condition lines to import PO templates. "
-                    "The agent can route around this via unplanned delivery cost, but the root cause sits in the PO."
-                ),
+                suggested_action="Adding freight/customs lines to the PO would let them match directly.",
                 evidence={"po_number": po.po_number, "price_basis": po.price_basis, "vendor_country": po.vendor_country},
             )
         )
@@ -167,7 +161,7 @@ def check_qty_consumed(po: PO, matches: list[LineMatch]) -> list[Exception_]:
                         f"PO line {line.line_no} has only {line.qty_open:g} {line.uom} open "
                         f"but the invoice bills {match.invoice_qty:g}"
                     ),
-                    suggested_action="Ask procurement to increase the PO quantity, or split the invoice.",
+                    suggested_action="The PO quantity would need increasing.",
                     evidence={
                         "line_no": line.line_no,
                         "qty": line.qty,
@@ -199,10 +193,7 @@ def check_unmatched_lines(
                 rule_id="R4",
                 severity="warn",
                 message=f"Invoice line '{description}' (${amount:,.2f}) matches no line on the PO",
-                suggested_action=(
-                    "Check whether the vendor billed an item that was never ordered, "
-                    "or whether the PO needs an additional line."
-                ),
+                suggested_action="No PO line agreed on item code, quantity, price or description.",
                 evidence={"description": description, "amount": amount},
             )
         )
@@ -227,8 +218,8 @@ def check_tax(invoice: Invoice, expected_code: str, calculated: float) -> list[E
                 f"${calculated:,.2f} ({expected_code}) by ${difference:,.2f}"
             ),
             suggested_action=(
-                "Within manual tolerance — post." if band == "auto"
-                else "Confirm the tax code with the vendor before posting; procurement may need to update the PO."
+                "Within tolerance." if band == "auto"
+                else "Tax code on the invoice does not agree with the PO."
             ),
             evidence={
                 "invoice_tax": invoice.tax_amount,
@@ -255,11 +246,8 @@ def check_keep_open(po: PO) -> list[Exception_]:
             code="KEEP_LINES_OPEN",
             rule_id="R3",
             severity="info",
-            message=f"Freight/customs lines to leave open: {listed}",
-            suggested_action=(
-                "Do not tick these lines. Freight often arrives later on a separate invoice "
-                "from a third party, and closing them here would strand that invoice."
-            ),
+            message=f"Freight/customs lines left open: {listed}",
+            suggested_action="Not selected — these stay available for a later invoice.",
             evidence={"lines": [l.line_no for l in open_lines]},
         )
     ]
@@ -274,7 +262,7 @@ def check_duplicate(store: Store, invoice: Invoice) -> list[Exception_]:
                 rule_id="R6",
                 severity="block",
                 message=f"Invoice {invoice.invoice_no} has already been posted as MIRO {store.posted[invoice.invoice_no]}",
-                suggested_action="Do not post again. Check whether the vendor re-sent the same invoice.",
+                suggested_action="Already posted — this is a duplicate.",
                 evidence={"invoice_no": invoice.invoice_no, "miro_no": store.posted[invoice.invoice_no]},
             )
         ]
@@ -292,10 +280,7 @@ def check_po_resolution(invoice: Invoice, po: PO | None) -> list[Exception_]:
                 rule_id="R6",
                 severity="block",
                 message=f"Invoice {invoice.invoice_no} carries no purchase-order reference",
-                suggested_action=(
-                    "Route to the non-PO queue for manual GL coding (FB60), or ask the vendor to quote a PO. "
-                    "Client policy requires a PO number on every invoice."
-                ),
+                suggested_action="Cannot be matched — needs a PO number.",
                 evidence={"invoice_no": invoice.invoice_no, "vendor": invoice.vendor_name},
             )
         ]
@@ -304,8 +289,8 @@ def check_po_resolution(invoice: Invoice, po: PO | None) -> list[Exception_]:
             code="PO_NOT_FOUND",
             rule_id="R6",
             severity="block",
-            message=f"PO reference '{invoice.po_number_raw}' does not resolve to a known purchase order",
-            suggested_action="Confirm the PO number with the vendor; it may be their own order number rather than ours.",
+            message=f"PO reference '{invoice.po_number_raw}' does not match any known purchase order",
+            suggested_action="May be the vendor's own order number.",
             evidence={"po_number_raw": invoice.po_number_raw, "invoice_no": invoice.invoice_no},
         )
     ]
